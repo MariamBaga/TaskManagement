@@ -8,9 +8,18 @@ class Project extends Model
 {
     protected $fillable = [
         'nom',
+        'priority',
+        'category',
+        'budjet',
+        'image',
         'description',
         'date_debut',
         'date_fin',
+    ];
+
+    protected $casts = [
+        'date_debut' => 'date:m/d/Y',
+        'date_fin' => 'date:m/d/Y',
     ];
 
     // relationship methods
@@ -23,8 +32,8 @@ class Project extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'affecters')
-        ->as('affectations')
-        ->using(Affecter::class)
-        ->withTimestamps();
+            ->as('affectations')
+            ->using(Affecter::class)
+            ->withTimestamps();
     }
 }
