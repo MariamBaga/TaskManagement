@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('titre');
             $table->string('description')->nullable();
-            $table->date('statut');
+            $table->string('statut');
             $table->date('date_echeance');
             $table->foreignIdFor(Project::class)->constrained();
             $table->foreignIdFor(User::class)->constrained();

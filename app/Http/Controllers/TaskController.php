@@ -12,15 +12,14 @@ class TaskController extends Controller
     // Afficher toutes les tâches
     public function index()
     {
-        $tasksInProgress = Task::with('project', 'user')->where('statut', 'In Progress')->get();
-        $tasksNeedsReview = Task::with('project', 'user')->where('statut', 'Needs Review')->get();
-        $tasksCompleted = Task::with('project', 'user')->where('statut', 'Completed')->get();
+        $tasksInProgress = Task::with('project', 'user')->where('statut', 'encours')->get();
+        $tasksNeedsReview = Task::with('project', 'user')->where('statut', 'review')->get();
+        $tasksCompleted = Task::with('project', 'user')->where('statut', 'complet')->get();
 
-         // Charger les projets et utilisateurs pour le modal de création
-    $projects = Project::all();
-    $users = User::all();
+        // Charger les projets et utilisateurs pour le modal de création
+        $projects = Project::all();
+        $users = User::all();
         return view('Admin.Task.index', compact('tasksInProgress', 'tasksNeedsReview', 'tasksCompleted', 'projects', 'users'));
-
     }
 
     // Afficher le formulaire de création de tâche
@@ -34,10 +33,11 @@ class TaskController extends Controller
     // Enregistrer une nouvelle tâche
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'titre' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'statut' => 'required|date',
+            'statut' => 'required|string',
             'date_echeance' => 'required|date',
             'project_id' => 'required|exists:projects,id',
             'user_id' => 'required|exists:users,id',

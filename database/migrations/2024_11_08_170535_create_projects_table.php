@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('priority');
             $table->string('category');
             $table->string('budjet');
-            $table->string('image');
+            $table->string('icon');
             $table->string('description')->nullable();
             $table->date('date_debut');
             $table->date('date_fin');

@@ -11,7 +11,7 @@ class Project extends Model
         'priority',
         'category',
         'budjet',
-        'image',
+        'icon',
         'description',
         'date_debut',
         'date_fin',

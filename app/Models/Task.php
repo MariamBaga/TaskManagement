@@ -10,7 +10,13 @@ class Task extends Model
         'titre',
         'description',
         'statut',
+        'project_id',
+        'user_id',
         'date_echeance',
+    ];
+
+    protected $casts = [
+        'date_echeance' => "date",
     ];
 
     // relationship methods
@@ -23,6 +29,4 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-   
 }

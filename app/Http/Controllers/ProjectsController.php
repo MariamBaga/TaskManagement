@@ -25,28 +25,53 @@ class ProjectsController extends Controller
             'description' => 'nullable|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|after:date_debut',
-            'image' => 'required|file|image',
+            'icon' => 'required|string',
+            'budjet' => 'required|numeric',
+            'users' => 'required|array',
+            'priority' => 'required|string',
+            'category' => 'required|string',
+        ]);
+        $project = Project::create($request->all());
+
+        foreach ($request->users as $user_id) {
+            $user = User::find($user_id);
+            $user->projects()->attach($project->id);
+        }
+
+
+
+        return back()->with('success', 'Projet Créé avec succès');
+        // if ($project)
+        // else
+        //     return back()->with('error', 'Erreur de saisie');
+    }
+
+    public function edit() {}
+
+    public function update(Request $request, Project $project)
+    {
+        dd($request->all(), $project);
+        $request->validate([
+            'nom' => 'required|string',
+            'description' => 'nullable|string',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|after:date_debut',
+            'icon' => 'required|string',
             'budjet' => 'required|numeric',
             'users' => 'required|array',
             'priority' => 'required|string',
             'category' => 'required|string',
         ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image')->store("Projects");
-            $project = new Project($request->all());
-            $project->image = $image;
-            $project->save();
-            if ($project)
-                return back()->with('success', 'Projet Créé avec succès');
-            else
-                return back()->with('error', 'Erreur de saisie');
+        $project->update($request->all());
+
+        foreach ($request->users as $user_id) {
+            $user = User::find($user_id);
+            $user->projects()->sync($project->id);
         }
+
+        return back()->with('success', 'Projet Créé avec succès');
     }
-
-    public function edit() {}
-
-    public function update() {}
 
     public function destroy() {}
 }

@@ -3,8 +3,7 @@
     <div class="d-flex flex-column h-100">
         <a href="index.html" class="mb-0 brand-icon">
             <span class="logo-icon">
-                <svg width="35" height="35" fill="currentColor" class="bi bi-clipboard-check"
-                    viewBox="0 0 16 16">
+                <svg width="35" height="35" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
                     <path
@@ -37,7 +36,7 @@
                 <!-- Menu: Sub menu ul -->
                 <ul class="sub-menu collapse" id="project-Components">
                     <li><a class="ms-link" href="{{ route('projects.index') }}"><span>Projects</span></a></li>
-                    <li><a class="ms-link" href="task.html"><span>Tasks</span></a></li>
+                    <li><a class="ms-link" href="{{ route('tasks.index') }}"><span>Tasks</span></a></li>
                     <li><a class="ms-link" href="timesheet.html"><span>Timesheet</span></a></li>
                     <li><a class="ms-link" href="team-leader.html"><span>Leaders</span></a></li>
                 </ul>
@@ -54,8 +53,8 @@
                 </ul>
             </li>
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components"
-                    href="#"><i class="icofont-user-male"></i> <span>Our Clients</span> <span
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i
+                        class="icofont-user-male"></i> <span>Our Clients</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
                 <ul class="sub-menu collapse" id="client-Components">
@@ -82,8 +81,8 @@
             </li>
 
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone"
-                    href="#"><i class="icofont-ui-calculator"></i> <span>Accounts</span> <span
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i
+                        class="icofont-ui-calculator"></i> <span>Accounts</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
                 <ul class="sub-menu collapse" id="menu-Componentsone">
@@ -94,8 +93,8 @@
                 </ul>
             </li>
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components"
-                    href="#"><i class="icofont-users-alt-5"></i> <span>Payroll</span> <span
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i
+                        class="icofont-users-alt-5"></i> <span>Payroll</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
                 <ul class="sub-menu collapse" id="payroll-Components">
@@ -114,8 +113,7 @@
                 </ul>
             </li>
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#extra-Components"
-                    href="#">
+                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#extra-Components" href="#">
                     <i class="icofont-code-alt"></i> <span>Other Pages</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sub menu ul -->
