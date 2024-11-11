@@ -2,9 +2,101 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    //
+    // Afficher toutes les tâches
+    public function index()
+    {
+        $tasksInProgress = Task::with('project', 'user')->where('statut', 'In Progress')->get();
+        $tasksNeedsReview = Task::with('project', 'user')->where('statut', 'Needs Review')->get();
+        $tasksCompleted = Task::with('project', 'user')->where('statut', 'Completed')->get();
+
+         // Charger les projets et utilisateurs pour le modal de création
+    $projects = Project::all();
+    $users = User::all();
+        return view('Admin.Task.index', compact('tasksInProgress', 'tasksNeedsReview', 'tasksCompleted', 'projects', 'users'));
+
+    }
+
+    // Afficher le formulaire de création de tâche
+    public function create()
+    {
+        $projects = Project::all();
+        $users = User::all();
+        return view('Admin.Task.create', compact('projects', 'users'));
+    }
+
+    // Enregistrer une nouvelle tâche
+    public function store(Request $request)
+    {
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'statut' => 'required|date',
+            'date_echeance' => 'required|date',
+            'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        Task::create([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'statut' => $request->statut,
+            'date_echeance' => $request->date_echeance,
+            'project_id' => $request->project_id,
+            'user_id' => $request->user_id,
+        ]);
+
+        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
+    }
+
+    // Afficher une tâche spécifique
+    public function show(Task $task)
+    {
+        return view('tasks.show', compact('task'));
+    }
+
+    // Afficher le formulaire de modification d'une tâche
+    public function edit(Task $task)
+    {
+        $projects = Project::all();
+        $users = User::all();
+        return view('tasks.edit', compact('task', 'projects', 'users'));
+    }
+
+    // Mettre à jour une tâche existante
+    public function update(Request $request, Task $task)
+    {
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'statut' => 'required|date',
+            'date_echeance' => 'required|date',
+            'project_id' => 'required|exists:projects,id',
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $task->update([
+            'titre' => $request->titre,
+            'description' => $request->description,
+            'statut' => $request->statut,
+            'date_echeance' => $request->date_echeance,
+            'project_id' => $request->project_id,
+            'user_id' => $request->user_id,
+        ]);
+
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+    }
+
+    // Supprimer une tâche
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
+    }
 }

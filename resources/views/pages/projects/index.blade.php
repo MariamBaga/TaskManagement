@@ -556,6 +556,7 @@
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
+<<<<<<< HEAD
                             <div class="col-sm">
                                 <label for="formFileMultipleone" class="form-label">Budget</label>
                                 <input type="number" class="form-control @error('budjet') is-invalid @enderror"
