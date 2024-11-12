@@ -29,8 +29,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                                    z-index: -1;
-                                                                                                                } */
+                                                                                                                                    z-index: -1;
+                                                                                                                                } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- Row end  -->
         <div class="row align-items-center">
             <div class="col-lg-12 col-md-12 flex-column">
@@ -72,434 +72,442 @@
                     {{-- all projects list --}}
                     <div class="tab-pane fade show active" id="All-list">
                         <div class="row g-3 gy-5 py-3 row-deck">
-                            @foreach ($projects as $project)
-                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between mt-5">
-                                                <div class="lesson_name">
-                                                    <div class="project-block light-orange-bg">
-                                                        <i class="{{ $project->icon }}"></i>
+                            @if ($projects->count() > 0)
+                                @foreach ($projects as $project)
+                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-between mt-5">
+                                                    <div class="lesson_name">
+                                                        <div class="project-block light-orange-bg">
+                                                            <i class="{{ $project->icon }}"></i>
+                                                        </div>
+                                                        <span class="small text-muted project_name fw-bold">
+                                                            {{ $project->category }}
+                                                        </span>
+                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                                     </div>
-                                                    <span class="small text-muted project_name fw-bold">
-                                                        {{ $project->category }}
-                                                    </span>
-                                                    <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
-                                                </div>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editproject{{ $project->id }}"><i
-                                                            class="icofont-edit text-success"></i></button>
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteproject{{ $project->id }}"><i
-                                                            class="icofont-ui-delete text-danger"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    @foreach ($project->users as $user)
-                                                        <img class="avatar rounded-circle sm" src="{{ $user->image }}"
-                                                            alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar1.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar3.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar4.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar8.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar10.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar11.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar6.jpg" alt="">
-                                                    @endforeach
-                                                    <span class="avatar rounded-circle text-center pointer sm"
-                                                        data-bs-toggle="modal" data-bs-target="#addUser"><i
-                                                            class="icofont-ui-add"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="row g-2 pt-4">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-paper-clip"></i>
-                                                        <span class="ms-2">{{ $project->tasks->count() }}
-                                                            Attachement</span>
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Basic outlined example">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editproject{{ $project->id }}"><i
+                                                                class="icofont-edit text-success"></i></button>
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $project->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-sand-clock"></i>
-                                                        <span
-                                                            class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
-                                                            Mois</span>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-list avatar-list-stacked pt-2">
+                                                        @foreach ($project->users as $user)
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="{{ $user->image }}" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar1.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar3.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar4.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar8.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar10.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar11.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar6.jpg" alt="">
+                                                        @endforeach
+                                                        <span class="avatar rounded-circle text-center pointer sm"
+                                                            data-bs-toggle="modal" data-bs-target="#addUser"><i
+                                                                class="icofont-ui-add"></i></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-group-students "></i>
-                                                        <span
-                                                            class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                <div class="row g-2 pt-4">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-paper-clip"></i>
+                                                            <span class="ms-2">{{ $project->tasks->count() }}
+                                                                Attachement</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-sand-clock"></i>
+                                                            <span
+                                                                class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
+                                                                Mois</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-group-students "></i>
+                                                            <span
+                                                                class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-ui-text-chat"></i>
+                                                            <span class="ms-2">45</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-ui-text-chat"></i>
-                                                        <span class="ms-2">45</span>
-                                                    </div>
+                                                <div class="dividers-block"></div>
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h4 class="small fw-bold mb-0">Progrès</h4>
+                                                    <span class="small light-danger-bg  p-1 rounded"><i
+                                                            class="icofont-ui-clock"></i>
+                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
+                                                        Jours</span>
                                                 </div>
-                                            </div>
-                                            <div class="dividers-block"></div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                <span class="small light-danger-bg  p-1 rounded"><i
-                                                        class="icofont-ui-clock"></i>
-                                                    {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                    Jours</span>
-                                            </div>
-                                            <div class="progress" style="height: 8px;">
-                                                <div class="progress-bar bg-secondary" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="15" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="30" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-secondary" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="15" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="30" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="Started-list">
                         <div class="row g-3 gy-5 py-3 row-deck">
-                            @foreach ($hight_projects as $project)
-                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between mt-5">
-                                                <div class="lesson_name">
-                                                    <div class="project-block light-orange-bg">
-                                                        <i class="{{ $project->icon }}"></i>
+                            @if ($hight_projects->count() > 0)
+                                @foreach ($hight_projects as $project)
+                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-between mt-5">
+                                                    <div class="lesson_name">
+                                                        <div class="project-block light-orange-bg">
+                                                            <i class="{{ $project->icon }}"></i>
+                                                        </div>
+                                                        <span class="small text-muted project_name fw-bold">
+                                                            {{ $project->category }}
+                                                        </span>
+                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                                     </div>
-                                                    <span class="small text-muted project_name fw-bold">
-                                                        {{ $project->category }}
-                                                    </span>
-                                                    <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
-                                                </div>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editproject{{ $project->id }}"><i
-                                                            class="icofont-edit text-success"></i></button>
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteproject{{ $project->id }}"><i
-                                                            class="icofont-ui-delete text-danger"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    @foreach ($project->users as $user)
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="{{ $user->image }}" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar1.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar3.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar4.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar8.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar10.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar11.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar6.jpg" alt="">
-                                                    @endforeach
-                                                    <span class="avatar rounded-circle text-center pointer sm"
-                                                        data-bs-toggle="modal" data-bs-target="#addUser"><i
-                                                            class="icofont-ui-add"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="row g-2 pt-4">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-paper-clip"></i>
-                                                        <span class="ms-2">{{ $project->tasks->count() }}
-                                                            Attachement</span>
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Basic outlined example">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editproject{{ $project->id }}"><i
+                                                                class="icofont-edit text-success"></i></button>
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $project->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-sand-clock"></i>
-                                                        <span
-                                                            class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
-                                                            Mois</span>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-list avatar-list-stacked pt-2">
+                                                        @foreach ($project->users as $user)
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="{{ $user->image }}" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar1.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar3.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar4.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar8.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar10.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar11.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar6.jpg" alt="">
+                                                        @endforeach
+                                                        <span class="avatar rounded-circle text-center pointer sm"
+                                                            data-bs-toggle="modal" data-bs-target="#addUser"><i
+                                                                class="icofont-ui-add"></i></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-group-students "></i>
-                                                        <span
-                                                            class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                <div class="row g-2 pt-4">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-paper-clip"></i>
+                                                            <span class="ms-2">{{ $project->tasks->count() }}
+                                                                Attachement</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-sand-clock"></i>
+                                                            <span
+                                                                class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
+                                                                Mois</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-group-students "></i>
+                                                            <span
+                                                                class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-ui-text-chat"></i>
+                                                            <span class="ms-2">45</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-ui-text-chat"></i>
-                                                        <span class="ms-2">45</span>
-                                                    </div>
+                                                <div class="dividers-block"></div>
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h4 class="small fw-bold mb-0">Progrès</h4>
+                                                    <span class="small light-danger-bg  p-1 rounded"><i
+                                                            class="icofont-ui-clock"></i>
+                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
+                                                        Jours</span>
                                                 </div>
-                                            </div>
-                                            <div class="dividers-block"></div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                <span class="small light-danger-bg  p-1 rounded"><i
-                                                        class="icofont-ui-clock"></i>
-                                                    {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                    Jours</span>
-                                            </div>
-                                            <div class="progress" style="height: 8px;">
-                                                <div class="progress-bar bg-secondary" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="15" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="30" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-secondary" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="15" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="30" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="Approval-list">
                         <div class="row g-3 gy-5 py-3 row-deck">
-                            @foreach ($important_projects as $project)
-                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between mt-5">
-                                                <div class="lesson_name">
-                                                    <div class="project-block light-orange-bg">
-                                                        <i class="{{ $project->icon }}"></i>
+                            @if ($important_projects->count() > 0)
+                                @foreach ($important_projects as $project)
+                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-between mt-5">
+                                                    <div class="lesson_name">
+                                                        <div class="project-block light-orange-bg">
+                                                            <i class="{{ $project->icon }}"></i>
+                                                        </div>
+                                                        <span class="small text-muted project_name fw-bold">
+                                                            {{ $project->category }}
+                                                        </span>
+                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                                     </div>
-                                                    <span class="small text-muted project_name fw-bold">
-                                                        {{ $project->category }}
-                                                    </span>
-                                                    <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
-                                                </div>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editproject{{ $project->id }}"><i
-                                                            class="icofont-edit text-success"></i></button>
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteproject{{ $project->id }}"><i
-                                                            class="icofont-ui-delete text-danger"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    @foreach ($project->users as $user)
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="{{ $user->image }}" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar1.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar3.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar4.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar8.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar10.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar11.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar6.jpg" alt="">
-                                                    @endforeach
-                                                    <span class="avatar rounded-circle text-center pointer sm"
-                                                        data-bs-toggle="modal" data-bs-target="#addUser"><i
-                                                            class="icofont-ui-add"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="row g-2 pt-4">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-paper-clip"></i>
-                                                        <span class="ms-2">{{ $project->tasks->count() }}
-                                                            Attachement</span>
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Basic outlined example">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editproject{{ $project->id }}"><i
+                                                                class="icofont-edit text-success"></i></button>
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $project->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-sand-clock"></i>
-                                                        <span
-                                                            class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
-                                                            Mois</span>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-list avatar-list-stacked pt-2">
+                                                        @foreach ($project->users as $user)
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="{{ $user->image }}" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar1.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar3.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar4.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar8.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar10.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar11.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar6.jpg" alt="">
+                                                        @endforeach
+                                                        <span class="avatar rounded-circle text-center pointer sm"
+                                                            data-bs-toggle="modal" data-bs-target="#addUser"><i
+                                                                class="icofont-ui-add"></i></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-group-students "></i>
-                                                        <span
-                                                            class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                <div class="row g-2 pt-4">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-paper-clip"></i>
+                                                            <span class="ms-2">{{ $project->tasks->count() }}
+                                                                Attachement</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-sand-clock"></i>
+                                                            <span
+                                                                class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
+                                                                Mois</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-group-students "></i>
+                                                            <span
+                                                                class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-ui-text-chat"></i>
+                                                            <span class="ms-2">45</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-ui-text-chat"></i>
-                                                        <span class="ms-2">45</span>
-                                                    </div>
+                                                <div class="dividers-block"></div>
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h4 class="small fw-bold mb-0">Progrès</h4>
+                                                    <span class="small light-danger-bg  p-1 rounded"><i
+                                                            class="icofont-ui-clock"></i>
+                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
+                                                        Jours</span>
                                                 </div>
-                                            </div>
-                                            <div class="dividers-block"></div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                <span class="small light-danger-bg  p-1 rounded"><i
-                                                        class="icofont-ui-clock"></i>
-                                                    {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                    Jours</span>
-                                            </div>
-                                            <div class="progress" style="height: 8px;">
-                                                <div class="progress-bar bg-secondary" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="15" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="30" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-secondary" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="15" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="30" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                     <div class="tab-pane fade" id="Completed-list">
                         <div class="row g-3 gy-5 py-3 row-deck">
-                            @foreach ($low_projects as $project)
-                                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center justify-content-between mt-5">
-                                                <div class="lesson_name">
-                                                    <div class="project-block light-orange-bg">
-                                                        <i class="{{ $project->icon }}"></i>
+                            @if ($low_projects->count() > 0)
+                                @foreach ($low_projects as $project)
+                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-between mt-5">
+                                                    <div class="lesson_name">
+                                                        <div class="project-block light-orange-bg">
+                                                            <i class="{{ $project->icon }}"></i>
+                                                        </div>
+                                                        <span class="small text-muted project_name fw-bold">
+                                                            {{ $project->category }}
+                                                        </span>
+                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                                     </div>
-                                                    <span class="small text-muted project_name fw-bold">
-                                                        {{ $project->category }}
-                                                    </span>
-                                                    <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
-                                                </div>
-                                                <div class="btn-group" role="group"
-                                                    aria-label="Basic outlined example">
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#editproject{{ $project->id }}"><i
-                                                            class="icofont-edit text-success"></i></button>
-                                                    <button type="button" class="btn btn-outline-secondary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteproject{{ $project->id }}"><i
-                                                            class="icofont-ui-delete text-danger"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-list avatar-list-stacked pt-2">
-                                                    @foreach ($project->users as $user)
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="{{ $user->image }}" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar1.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar3.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar4.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar8.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar10.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar11.jpg" alt="">
-                                                        <img class="avatar rounded-circle sm"
-                                                            src="assets/images/xs/avatar6.jpg" alt="">
-                                                    @endforeach
-                                                    <span class="avatar rounded-circle text-center pointer sm"
-                                                        data-bs-toggle="modal" data-bs-target="#addUser"><i
-                                                            class="icofont-ui-add"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="row g-2 pt-4">
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-paper-clip"></i>
-                                                        <span class="ms-2">{{ $project->tasks->count() }}
-                                                            Attachement</span>
+                                                    <div class="btn-group" role="group"
+                                                        aria-label="Basic outlined example">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#editproject{{ $project->id }}"><i
+                                                                class="icofont-edit text-success"></i></button>
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $project->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-sand-clock"></i>
-                                                        <span
-                                                            class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
-                                                            Mois</span>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-list avatar-list-stacked pt-2">
+                                                        @foreach ($project->users as $user)
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="{{ $user->image }}" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar1.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar3.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar4.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar8.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar10.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar11.jpg" alt="">
+                                                            <img class="avatar rounded-circle sm"
+                                                                src="assets/images/xs/avatar6.jpg" alt="">
+                                                        @endforeach
+                                                        <span class="avatar rounded-circle text-center pointer sm"
+                                                            data-bs-toggle="modal" data-bs-target="#addUser"><i
+                                                                class="icofont-ui-add"></i></span>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-group-students "></i>
-                                                        <span
-                                                            class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                <div class="row g-2 pt-4">
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-paper-clip"></i>
+                                                            <span class="ms-2">{{ $project->tasks->count() }}
+                                                                Attachement</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-sand-clock"></i>
+                                                            <span
+                                                                class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
+                                                                Mois</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-group-students "></i>
+                                                            <span
+                                                                class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-ui-text-chat"></i>
+                                                            <span class="ms-2">45</span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="icofont-ui-text-chat"></i>
-                                                        <span class="ms-2">45</span>
-                                                    </div>
+                                                <div class="dividers-block"></div>
+                                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                                    <h4 class="small fw-bold mb-0">Progrès</h4>
+                                                    <span class="small light-danger-bg  p-1 rounded"><i
+                                                            class="icofont-ui-clock"></i>
+                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
+                                                        Jours</span>
                                                 </div>
-                                            </div>
-                                            <div class="dividers-block"></div>
-                                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                                <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                <span class="small light-danger-bg  p-1 rounded"><i
-                                                        class="icofont-ui-clock"></i>
-                                                    {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                    Jours</span>
-                                            </div>
-                                            <div class="progress" style="height: 8px;">
-                                                <div class="progress-bar bg-secondary" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="15" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 25%" aria-valuenow="30" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                                <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                    style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
+                                                <div class="progress" style="height: 8px;">
+                                                    <div class="progress-bar bg-secondary" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="15" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 25%" aria-valuenow="30" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                        style="width: 20%" aria-valuenow="20" aria-valuemin="0"
+                                                        aria-valuemax="100"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
