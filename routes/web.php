@@ -19,8 +19,12 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    // Récupérer les notifications de l'utilisateur connecté
+    $notifications = Auth::user()->notifications()->latest()->get();
+
+    return view('dashboard', compact('notifications'));
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     //define my config routes
