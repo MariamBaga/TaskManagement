@@ -3,6 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TaskController;
+
+use App\Http\Controllers\EmployeController;
+use App\Http\Controllers\EmployeProfileController;
+
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,6 +22,13 @@ Route::middleware('auth')->group(function () {
     //define my config routes
     Route::resource('projects', ProjectsController::class);
     Route::resource('tasks', TaskController::class);
+
+ Route::resource('employee', EmployeController::class);
+
+ Route::resource('employeeProfile', EmployeProfileController::class);
+
+
+
 
     //tâches des projets
     // Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
