@@ -29,7 +29,7 @@
                                                     src="assets/images/xs/avatar1.jpg" alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
-                                                            class="font-weight-bold">Dylan Hunter</span>
+                                                            class="font-weight-bold">{{ auth()->user()->name }}</span>
                                                         <small>2MIN</small>
                                                     </p>
                                                     <span class="">Added 2021-02-19 my-Task ui/ux

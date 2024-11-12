@@ -15,11 +15,12 @@ class TaskController extends Controller
         $tasksInProgress = Task::with('project', 'user')->where('statut', 'encours')->get();
         $tasksNeedsReview = Task::with('project', 'user')->where('statut', 'review')->get();
         $tasksCompleted = Task::with('project', 'user')->where('statut', 'complet')->get();
+        $tasks = Task::latest();
 
         // Charger les projets et utilisateurs pour le modal de création
         $projects = Project::all();
         $users = User::all();
-        return view('Admin.Task.index', compact('tasksInProgress', 'tasksNeedsReview', 'tasksCompleted', 'projects', 'users'));
+        return view('Admin.Task.index', compact('tasksInProgress', 'tasksNeedsReview', 'tasksCompleted', 'projects', 'users', 'tasks'));
     }
 
     // Afficher le formulaire de création de tâche
