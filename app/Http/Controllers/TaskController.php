@@ -148,7 +148,7 @@ class TaskController extends Controller
     {
         // Valider la demande
         $validated = request()->validate([
-            'statut' => 'required|in:encours,review,completed',
+            'statut' => 'required|in:encours,review,complet',
         ]);
 
 
