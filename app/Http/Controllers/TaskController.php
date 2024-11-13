@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-   
+
     // Afficher toutes les tâches
     public function index()
     {
@@ -123,4 +123,21 @@ class TaskController extends Controller
         $task->delete();
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
     }
+
+    public function updateStatus(Task $task)
+    {
+        // Valider la demande
+        $validated = request()->validate([
+            'statut' => 'required|in:encours,review,completed',
+        ]);
+
+        // Mettre à jour le statut de la tâche
+        $task->statut = $validated['statut'];
+        $task->save();
+
+        // Rediriger vers la page des tâches avec un message de succès
+        return redirect()->route('tasks.index')->with('success', 'Statut de la tâche mis à jour avec succès.');
+    }
+
+    
 }

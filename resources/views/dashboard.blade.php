@@ -3,6 +3,7 @@
 <!-- Mirrored from pixelwibes.com/template/my-task/html/dist/project-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Nov 2024 12:50:51 GMT -->
 @section('head')
 
+
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -18,6 +19,13 @@
 @endsection
 
 @section('content')
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 
 <!-- Corps: Corps -->
 <div class="body d-flex py-3">
@@ -148,7 +156,7 @@
                                                 <td><span class="badge @if($project->priority == 'élévé') bg-danger @elseif($project->priority == 'Moyenne') bg-warning @else bg-success @endif">{{ $project->priority }}</span></td>
                                             </tr>
                                             @endforeach
-                                            
+
 
                                         </tbody>
                                     </table>
