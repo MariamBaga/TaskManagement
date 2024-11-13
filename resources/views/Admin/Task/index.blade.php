@@ -40,6 +40,14 @@
 </head>
 @endsection
 @section('content')
+
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Status</strong> modifiée avec succès
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+@endif
+
 <div class="body d-flex py-lg-3 py-md-2">
     <div class="container-xxl">
         <div class="row align-items-center">
@@ -48,9 +56,12 @@
                     class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                     <h3 class="fw-bold py-3 mb-0">Tâches</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
+                        @admin
                         <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
                             data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
                             Une Tâche</button>
+
+                            @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
                                     role="tab">Tous</a></li>
@@ -67,234 +78,90 @@
         </div>
         <!-- Row end  -->
         <div class="row align-items-center">
-            <div class="col-lg-12 col-md-12 flex-column">
-                <div class="tab-content mt-4">
-                    {{-- all tasks list --}}
-                    <div class="tab-pane fade show active" id="All-list">
-                        <div class="row g-3 gy-5 py-3 row-deck">
-                            @if ($tasks->count() > 0)
-                                @foreach ($tasks as $task)
-                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center justify-content-between mt-2">
-                                                    <div class="lesson_name">
-                                                        <span class="small text-muted project_name fw-bold">
-                                                            {{ $task->category }}
-                                                        </span>
-                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $task->titre }}</h6>
-                                                    </div>
-                                                    <div class="btn-group" role="group"
-                                                        aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editproject{{ $task->id }}"><i
-                                                                class="icofont-edit text-success"></i></button>
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
-                                                    </div>
-                                                </div>
+    <div class="col-lg-12 col-md-12 flex-column">
+        <div class="tab-content mt-4">
+            {{-- all tasks list --}}
+            <div class="tab-pane fade show active" id="All-list">
+                <div class="row g-3 gy-5 py-3 row-deck">
+                    @if ($tasks->count() > 0)
+                        @foreach ($tasks as $task)
+                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center justify-content-between mt-2">
+                                            <div class="lesson_name">
+                                                <span class="small text-muted project_name fw-bold">
+                                                    {{ $task->category }}
+                                                </span>
+                                                <h6 class="mb-0 fw-bold fs-6 mb-2">{{ $task->titre }}</h6>
+                                            </div>
 
-                                                <p class="py-2 mb-0">{{ $task->description }}.</p>
-                                                <div class="dividers-block"></div>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span
-                                                                        class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
+                                            {{-- Bouton d'édition visible uniquement pour les administrateurs --}}
+                                            @admin
+                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                                <button type="button" class="btn btn-outline-secondary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#editproject{{ $task->id }}">
+                                                    <i class="icofont-edit text-success"></i>
+                                                </button>
+                                            </div>
+                                            @endadmin
+                                        </div>
 
-                                                        <div
-                                                            class="small text-truncate @if($task->statut == "encours") bg-warning @elseif($task->statut == "review") light-danger-bg @else bg-success @endif py-1 px-2 rounded-1 d-inline-block fw-bold small">
-                                                            {{ $task->statut }} </div>
+                                        <p class="py-2 mb-0">{{ $task->description }}.</p>
+                                        <div class="dividers-block"></div>
+                                        <div class="tikit-info row g-3 align-items-center">
+                                            <div class="col-sm">
+                                                <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                    <li class="me-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="icofont-flag"></i>
+                                                            <span class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm text-end">
+                                                {{-- Affichage du statut avec option de modification pour les utilisateurs standards --}}
+                                                @if (auth()->user()->role == 'admin')
+                                                    {{-- Admin peut voir et éditer le statut --}}
+                                                    <div class="small text-truncate
+                                                        @if($task->statut == 'encours') bg-warning
+                                                        @elseif($task->statut == 'review') light-danger-bg
+                                                        @else bg-success @endif
+                                                        py-1 px-2 rounded-1 d-inline-block fw-bold small">
+                                                        {{ $task->statut }}
                                                     </div>
-                                                </div>
+                                                @else
+                                                    {{-- Utilisateur standard peut modifier le statut --}}
+                                                    <form action="{{ route('update-status', $task->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <select name="statut" class="form-select form-select-sm" onchange="this.form.submit()">
+                                                            <option value="encours" {{ $task->statut == 'encours' ? 'selected' : '' }}>En cours</option>
+                                                            <option value="review" {{ $task->statut == 'review' ? 'selected' : '' }}>Review</option>
+                                                            <option value="complet" {{ $task->statut == 'complet' ? 'selected' : '' }}>Complété</option>
+                                                        </select>
+                                                    </form>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Started-list">
-                        <div class="row g-3 gy-5 py-3 row-deck">
-                            @if ($tasksNeedsReview->count() > 0)
-                                @foreach ($tasksNeedsReview as $task)
-                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center justify-content-between mt-2">
-                                                    <div class="lesson_name">
-                                                        <span class="small text-muted project_name fw-bold">
-                                                            {{ $task->category }}
-                                                        </span>
-                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $task->titre }}</h6>
-                                                    </div>
-                                                    <div class="btn-group" role="group"
-                                                        aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editproject{{ $task->id }}"><i
-                                                                class="icofont-edit text-success"></i></button>
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <p class="py-2 mb-0">{{ $task->description }}.</p>
-                                                <div class="dividers-block"></div>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span
-                                                                        class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div
-                                                            class="small text-truncate @if($task->statut == "encours") bg-warning @elseif($task->statut == "review") light-danger-bg @else bg-success @endif py-1 px-2 rounded-1 d-inline-block fw-bold small">
-                                                            {{ $task->statut }} </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Approval-list">
-                        <div class="row g-3 gy-5 py-3 row-deck">
-                            @if ($tasksInProgress->count() > 0)
-                                @foreach ($tasksInProgress as $task)
-                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center justify-content-between mt-2">
-                                                    <div class="lesson_name">
-                                                        <span class="small text-muted project_name fw-bold">
-                                                            {{ $task->category }}
-                                                        </span>
-                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $task->titre }}</h6>
-                                                    </div>
-                                                    <div class="btn-group" role="group"
-                                                        aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editproject{{ $task->id }}"><i
-                                                                class="icofont-edit text-success"></i></button>
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <p class="py-2 mb-0">{{ $task->description }}.</p>
-                                                <div class="dividers-block"></div>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span
-                                                                        class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div
-                                                            class="small text-truncate @if($task->statut == "encours") bg-warning @elseif($task->statut == "review") light-danger-bg @else bg-success @endif py-1 px-2 rounded-1 d-inline-block fw-bold small">
-                                                            {{ $task->statut }} </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="Completed-list">
-                        <div class="row g-3 gy-5 py-3 row-deck">
-                            @if ($tasksCompleted->count() > 0)
-                                @foreach ($tasksCompleted as $task)
-                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="d-flex align-items-center justify-content-between mt-2">
-                                                    <div class="lesson_name">
-                                                        <span class="small text-muted project_name fw-bold">
-                                                            {{ $task->category }}
-                                                        </span>
-                                                        <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $task->titre }}</h6>
-                                                    </div>
-                                                    <div class="btn-group" role="group"
-                                                        aria-label="Basic outlined example">
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#editproject{{ $task->id }}"><i
-                                                                class="icofont-edit text-success"></i></button>
-                                                        <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
-                                                    </div>
-                                                </div>
-
-                                                <p class="py-2 mb-0">{{ $task->description }}.</p>
-                                                <div class="dividers-block"></div>
-                                                <div class="tikit-info row g-3 align-items-center">
-                                                    <div class="col-sm">
-                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                            <li class="me-2">
-                                                                <div class="d-flex align-items-center">
-                                                                    <i class="icofont-flag"></i>
-                                                                    <span
-                                                                        class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm text-end">
-
-                                                        <div
-                                                            class="small text-truncate @if($task->statut == "encours") bg-warning @elseif($task->statut == "review") light-danger-bg @else bg-success @endif py-1 px-2 rounded-1 d-inline-block fw-bold small">
-                                                            {{ $task->statut }} </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
+            {{-- Autres listes de tâches ... --}}
         </div>
     </div>
 </div>
+
+    </div>
+</div>
+
+
 <!-- Create task-->
 <div class="modal fade" id="createproject" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
@@ -393,6 +260,8 @@
         </div>
     </div>
 </div>
+
+
 <!-- Edit Project-->
 @foreach ($tasks as $task)
     <div class="modal fade" id="editproject{{ $task->id }}" tabindex="-1" aria-hidden="true">
