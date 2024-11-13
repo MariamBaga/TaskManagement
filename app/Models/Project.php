@@ -15,6 +15,7 @@ class Project extends Model
         'description',
         'date_debut',
         'date_fin',
+        'statut',
     ];
 
     protected $casts = [

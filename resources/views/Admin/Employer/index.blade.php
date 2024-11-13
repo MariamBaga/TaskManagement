@@ -27,8 +27,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                z-index: -1;
-                                                                            } */
+                                                                                    z-index: -1;
+                                                                                } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -48,7 +48,7 @@
                         <h3 class="fw-bold flex-fill mb-0 mt-sm-0">Employé</h3>
                         <button type="button" class="btn btn-dark me-1 mt-1 w-sm-100" data-bs-toggle="modal"
                             data-bs-target="#createemp"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
-                            un Employé</button>
+                            un Utilisateur</button>
                         <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle mt-1 w-sm-100" type="button"
                                 id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -66,44 +66,47 @@
         </div><!-- Fin de ligne -->
         <div
             class="row g-3 row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-2 row-deck py-1 pb-4">
-            <div class="col">
-                <div class="card teacher-card">
-                    <div class="card-body d-flex">
-                        <div class="profile-av pe-xl-4 pe-md-2 pe-sm-4 pe-4 text-center w220">
-                            <img src="assets/images/lg/avatar3.jpg" alt=""
-                                class="avatar xl rounded-circle img-thumbnail shadow-sm">
-                            <div class="about-info d-flex align-items-center mt-3 justify-content-center">
-                                <div class="followers me-2">
-                                    <i class="icofont-tasks color-careys-pink fs-4"></i>
-                                    <span class="">04</span>
-                                </div>
-                                <div class="star me-2">
-                                    <i class="icofont-star text-warning fs-4"></i>
-                                    <span class="">4.5</span>
-                                </div>
-                                <div class="own-video">
-                                    <i class="icofont-data color-light-orange fs-4"></i>
-                                    <span class="">04</span>
+            @foreach ($users as $user)
+                <div class="col">
+                    <div class="card teacher-card">
+                        <div class="card-body d-flex">
+
+                            <div class="profile-av pe-xl-4 pe-md-2 pe-sm-4 pe-4 text-center w220">
+                                <img src="{{ asset('storage/'.$user->image) }}" alt=""
+                                    class="avatar xl rounded-circle img-thumbnail shadow-sm">
+                                <div class="about-info d-flex align-items-center mt-3 justify-content-center">
+                                    <div class="followers me-2">
+                                        <i class="icofont-tasks color-careys-pink fs-4"></i>
+                                        <span class="">{{ $user->tasks->where('statut', 'complet')->count()}}</span>
+                                    </div>
+                                    <div class="star me-2">
+                                        <i class="icofont-star text-warning fs-4"></i>
+                                        <span class="">4.5</span>
+                                    </div>
+                                    <div class="own-video">
+                                        <i class="icofont-data color-light-orange fs-4"></i>
+                                        <span class="">{{ $user->tasks->count() }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
-                            <h6 class="mb-0 mt-2 fw-bold d-block fs-6">Luke Short</h6>
-                            <span
-                                class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-11 mb-0 mt-1">Designer UI/UX</span>
-                            <div class="video-setting-icon mt-3 pt-3 border-top">
-                                <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices. Vestibulum ante
-                                    ipsum primis in faucibus orci luctus et ultrices.</p>
+                            <div class="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
+                                <h6 class="mb-0 mt-2 fw-bold d-block fs-6">{{ $user->name }}</h6>
+                                <span
+                                    class="light-info-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-11 mb-0 mt-1">{{ $user->profile}}
+                                    </span>
+                                <div class="video-setting-icon mt-3 pt-3 border-top">
+                                    <p>{{ $user->description }}</p>
+                                </div>
+                                <a href="{{ route('tasks.index') }}" class="btn btn-dark btn-sm mt-1"><i
+                                        class="icofont-plus-circle me-2 fs-6"></i>Ajouter Tâche</a>
+                                <a href="{{ route('users.show', $user) }}" class="btn btn-dark btn-sm mt-1"><i
+                                        class="icofont-invisible me-2 fs-6"></i>Profil</a>
                             </div>
-                            <a href="{{ route('tasks.index') }}" class="btn btn-dark btn-sm mt-1"><i
-                                    class="icofont-plus-circle me-2 fs-6"></i>Ajouter Tâche</a>
-                            <a href="{{ route('employeeProfile.index') }}" class="btn btn-dark btn-sm mt-1"><i
-                                    class="icofont-invisible me-2 fs-6"></i>Profil</a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
+            @endforeach
+            {{-- <div class="col">
                 <div class="card teacher-card">
                     <div class="card-body d-flex">
                         <div class="profile-av pe-xl-4 pe-md-2 pe-sm-4 pe-4 text-center w220">
@@ -127,7 +130,8 @@
                         <div class="teacher-info border-start ps-xl-4 ps-md-3 ps-sm-4 ps-4 w-100">
                             <h6 class="mb-0 mt-2 fw-bold d-block fs-6">Lillian Powell</h6>
                             <span
-                                class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-11 mb-0 mt-1">Assurance Qualité</span>
+                                class="light-success-bg py-1 px-2 rounded-1 d-inline-block fw-bold small-11 mb-0 mt-1">Assurance
+                                Qualité</span>
                             <div class="video-setting-icon mt-3 pt-3 border-top">
                                 <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices. Vestibulum ante
                                     ipsum primis in faucibus orci luctus et ultrices.</p>
@@ -139,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

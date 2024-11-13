@@ -18,87 +18,42 @@
 
         <ul class="menu-list flex-grow-1 mt-3">
             <li class="collapsed">
-                <a class="m-link active" data-bs-toggle="collapse" data-bs-target="#dashboard-Components"
-                    href="#">
-                    <i class="icofont-home fs-5"></i> <span>Tableau de bord</span> <span
-                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse show" id="dashboard-Components">
-                    <li><a class="ms-link" href="#"> <span>Tableau de bord RH</span></a></li>
-                    <li><a class="ms-link active" href="{{ route('dashboard') }}"> <span>Tableau de bord
+                <a class="m-link @if(Route::is('dashboard')) active @endif" data-bs-toggle="collapse" data-bs-target="#dashboard-Components"
+                    href="#">
+                    <i class="icofont-home fs-5"></i> <span>Dashboard</span> <span
+                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
+                <ul class="sub-menu collapse @if (Route::is('dashboard')) show @endif" id="dashboard-Components">
+                    <li><a class="ms-link @if (Route::is('dashboard')) active @endif"
+                            href="{{ route('dashboard') }}"> <span>Tableau de bord
                                 Projet</span></a></li>
                 </ul>
             </li>
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#project-Components" href="#">
+                <a class="m-link @if (request()->routeIs(['projects.index', 'tasks.index'])) active @endif" data-bs-toggle="collapse"
+                    data-bs-target="#project-Components" href="#">
                     <i class="icofont-briefcase"></i><span>Projets</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="project-Components">
-                    <li><a class="ms-link" href="{{ route('projects.index') }}"><span>Projets</span></a></li>
-                    <li><a class="ms-link" href="{{ route('tasks.index') }}"><span>Tâches</span></a></li>
-                    <li><a class="ms-link" href="timesheet.html"><span>Feuille de temps</span></a></li>
-                    <li><a class="ms-link" href="team-leader.html"><span>Chefs d'équipe</span></a></li>
+                <ul class="sub-menu collapse @if (request()->routeIs(['tasks.index', "projects.index"])) show @endif" id="project-Components">
+                    <li><a class="ms-link @if (request()->routeIs(['projects.index'])) active @endif"
+                            href="{{ route('projects.index') }}"><span>Projets</span></a></li>
+                    <li><a class="ms-link @if (request()->routeIs(['tasks.index'])) active @endif"
+                            href="{{ route('tasks.index') }}"><span>Tâches</span></a></li>
                 </ul>
             </li>
 
-            <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#tikit-Components" href="#"><i
-                        class="icofont-ticket"></i> <span>Tickets</span> <span
-                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="tikit-Components">
-                    <li><a class="ms-link" href="tickets.html"> <span>Vue des tickets</span></a></li>
-                    <li><a class="ms-link" href="ticket-detail.html"> <span>Détail du ticket</span></a></li>
-                </ul>
-            </li>
-            <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#client-Components" href="#"><i
-                        class="icofont-user-male"></i> <span>Nos Clients</span> <span
-                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="client-Components">
-                    <li><a class="ms-link" href="ourclients.html"> <span>Clients</span></a></li>
-                    <li><a class="ms-link" href="profile.html"> <span>Profil du Client</span></a></li>
-                </ul>
-            </li>
-            <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#"><i
-                        class="icofont-users-alt-5"></i> <span>Employés</span> <span
-                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="emp-Components">
-                    <li><a class="ms-link" href="{{ route('employee.index') }}"> <span>Membres</span></a></li>
-                    <li><a class="ms-link" href="{{ route('employeeProfile.index') }}"> <span>Profil des Membres</span></a></li>
-                    <li><a class="ms-link" href="holidays.html"> <span>Congés</span></a></li>
-                    <li><a class="ms-link" href="attendance-employees.html"> <span>Présence des Employés</span></a></li>
-                    <li><a class="ms-link" href="attendance.html"> <span>Présence</span></a></li>
-                    <li><a class="ms-link" href="leave-request.html"> <span>Demande de Congé</span></a></li>
-                    <li><a class="ms-link" href="department.html"> <span>Département</span></a></li>
-                    <li><a class="ms-link" href="loan.html"> <span>Prêt</span></a></li>
-                </ul>
-            </li>
+
 
             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Componentsone" href="#"><i
-                        class="icofont-ui-calculator"></i> <span>Comptes</span> <span
+                <a class="m-link @if (Route::is('users.index')) active @endif" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#"><i
+                        class="icofont-users-alt-5"></i> <span>Comptes</span> <span
                         class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
                 <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="menu-Componentsone">
-                    <li><a class="ms-link" href="invoices.html"><span>Factures</span> </a></li>
-                    <li><a class="ms-link" href="payments.html"><span>Paiements</span> </a></li>
-                    <li><a class="ms-link" href="expenses.html"><span>Dépenses</span> </a></li>
-                    <li><a class="ms-link" href="create-invoice.html"><span>Créer une Facture</span> </a></li>
-                </ul>
-            </li>
-            <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#payroll-Components" href="#"><i
-                        class="icofont-users-alt-5"></i> <span>Paye</span> <span
-                        class="arrow icofont-dotted-down ms-auto text-end fs-5"></span></a>
-                <!-- Menu: Sous-menu ul -->
-                <ul class="sub-menu collapse" id="payroll-Components">
-                    <li><a class="ms-link" href="salaryslip.html"><span>Salaire des Employés</span></a></li>
-                    <li><a class="ms-link" href="salaryslip-view.html"><span>Vue du Bulletin de Salaire</span></a></li>
+                <ul class="sub-menu collapse @if (Route::is('users.index')) show @endif" id="emp-Components">
+                    <li><a class="ms-link @if (Route::is('users.index')) active @endif" href="{{ route('users.index') }}"> <span>Utilisateurs</span></a></li>
+                    <li><a class="ms-link" href="{{ route('employeeProfile.index') }}"> <span>Profil des
+                                Membres</span></a></li>
                 </ul>
             </li>
         </ul>
