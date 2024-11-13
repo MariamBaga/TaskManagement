@@ -29,8 +29,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                                                                                                z-index: -1;
-                                                                                                                                                                            } */
+                                                                                                                                                                                    z-index: -1;
+                                                                                                                                                                                } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -41,11 +41,11 @@
 @endsection
 @section('content')
 
-@if(session('success'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Status</strong> modifiée avec succès
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-</div>
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Status</strong> modifiée avec succès
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 @endif
 
 <div class="body d-flex py-lg-3 py-md-2">
@@ -57,11 +57,10 @@
                     <h3 class="fw-bold py-3 mb-0">Tâches</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
                         @admin
-                        <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
-                            data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
-                            Une Tâche</button>
-
-                            @endadmin
+                            <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
+                                data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
+                                Une Tâche</button>
+                        @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
                                     role="tab">Tous</a></li>
@@ -78,85 +77,97 @@
         </div>
         <!-- Row end  -->
         <div class="row align-items-center">
-    <div class="col-lg-12 col-md-12 flex-column">
-        <div class="tab-content mt-4">
-            {{-- all tasks list --}}
-            <div class="tab-pane fade show active" id="All-list">
-                <div class="row g-3 gy-5 py-3 row-deck">
-                    @if ($tasks->count() > 0)
-                        @foreach ($tasks as $task)
-                            <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center justify-content-between mt-2">
-                                            <div class="lesson_name">
-                                                <span class="small text-muted project_name fw-bold">
-                                                    {{ $task->category }}
-                                                </span>
-                                                <h6 class="mb-0 fw-bold fs-6 mb-2">{{ $task->titre }}</h6>
-                                            </div>
+            <div class="col-lg-12 col-md-12 flex-column">
+                <div class="tab-content mt-4">
+                    {{-- all tasks list --}}
+                    <div class="tab-pane fade show active" id="All-list">
+                        <div class="row g-3 gy-5 py-3 row-deck">
+                            @if ($tasks->count() > 0)
+                                @foreach ($tasks as $task)
+                                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center justify-content-between mt-2">
+                                                    <div class="lesson_name">
+                                                        <span class="small text-muted project_name fw-bold">
+                                                            {{ $task->category }}
+                                                        </span>
+                                                        <h6 class="mb-0 fw-bold fs-6 mb-2">{{ $task->titre }}</h6>
+                                                    </div>
 
-                                            {{-- Bouton d'édition visible uniquement pour les administrateurs --}}
-                                            @admin
-                                            <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                                <button type="button" class="btn btn-outline-secondary"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#editproject{{ $task->id }}">
-                                                    <i class="icofont-edit text-success"></i>
-                                                </button>
-                                            </div>
-                                            @endadmin
-                                        </div>
-
-                                        <p class="py-2 mb-0">{{ $task->description }}.</p>
-                                        <div class="dividers-block"></div>
-                                        <div class="tikit-info row g-3 align-items-center">
-                                            <div class="col-sm">
-                                                <ul class="d-flex list-unstyled align-items-center flex-wrap">
-                                                    <li class="me-2">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="icofont-flag"></i>
-                                                            <span class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
+                                                    {{-- Bouton d'édition visible uniquement pour les administrateurs --}}
+                                                    @admin
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Basic outlined example">
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#editproject{{ $task->id }}">
+                                                                <i class="icofont-edit text-success"></i>
+                                                            </button>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-sm text-end">
-                                                {{-- Affichage du statut avec option de modification pour les utilisateurs standards --}}
-                                                @if (auth()->user()->role == 'admin')
-                                                    {{-- Admin peut voir et éditer le statut --}}
-                                                    <div class="small text-truncate
-                                                        @if($task->statut == 'encours') bg-warning
+                                                    @endadmin
+                                                </div>
+
+                                                <p class="py-2 mb-0">{{ $task->description }}.</p>
+                                                <div class="dividers-block"></div>
+                                                <div class="tikit-info row g-3 align-items-center">
+                                                    <div class="col-sm">
+                                                        <ul class="d-flex list-unstyled align-items-center flex-wrap">
+                                                            <li class="me-2">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="icofont-flag"></i>
+                                                                    <span
+                                                                        class="ms-1">{{ $task->date_echeance->translatedFormat('d F') }}</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-sm text-end">
+                                                        {{-- Affichage du statut avec option de modification pour les utilisateurs standards --}}
+                                                        @if (auth()->user()->role == 'admin')
+                                                            {{-- Admin peut voir et éditer le statut --}}
+                                                            <div
+                                                                class="small text-truncate
+                                                        @if ($task->statut == 'encours') bg-warning
                                                         @elseif($task->statut == 'review') light-danger-bg
                                                         @else bg-success @endif
                                                         py-1 px-2 rounded-1 d-inline-block fw-bold small">
-                                                        {{ $task->statut }}
+                                                                {{ $task->statut }}
+                                                            </div>
+                                                        @else
+                                                            {{-- Utilisateur standard peut modifier le statut --}}
+                                                            <form action="{{ route('update-status', $task->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                                <select name="statut"
+                                                                    class="form-select form-select-sm"
+                                                                    onchange="this.form.submit()">
+                                                                    <option value="encours"
+                                                                        {{ $task->statut == 'encours' ? 'selected' : '' }}>
+                                                                        En cours</option>
+                                                                    <option value="review"
+                                                                        {{ $task->statut == 'review' ? 'selected' : '' }}>
+                                                                        Review</option>
+                                                                    <option value="completed"
+                                                                        {{ $task->statut == 'completed' ? 'selected' : '' }}>
+                                                                        Complété</option>
+                                                                </select>
+                                                            </form>
+                                                        @endif
                                                     </div>
-                                                @else
-                                                    {{-- Utilisateur standard peut modifier le statut --}}
-                                                    <form action="{{ route('update-status', $task->id) }}" method="POST">
-                                                        @csrf
-                                                        @method('PATCH')
-                                                        <select name="statut" class="form-select form-select-sm" onchange="this.form.submit()">
-                                                            <option value="encours" {{ $task->statut == 'encours' ? 'selected' : '' }}>En cours</option>
-                                                            <option value="review" {{ $task->statut == 'review' ? 'selected' : '' }}>Review</option>
-                                                            <option value="complet" {{ $task->statut == 'complet' ? 'selected' : '' }}>Complété</option>
-                                                        </select>
-                                                    </form>
-                                                @endif
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+                    {{-- Autres listes de tâches ... --}}
                 </div>
             </div>
-            {{-- Autres listes de tâches ... --}}
         </div>
-    </div>
-</div>
 
     </div>
 </div>
@@ -188,7 +199,8 @@
                         <!-- Project Name -->
                         <div class="mb-3">
                             <label class="form-label">Nom du projet</label>
-                            <select name="project_id" id="create_task" class="form-select @error('project_id') is-invalid @enderror">
+                            <select name="project_id" id="create_task"
+                                class="form-select @error('project_id') is-invalid @enderror">
                                 <option selected disabled>Sélectionner un projet</option>
                                 @foreach ($projects as $project)
                                     <option value="{{ $project->id }}"
@@ -416,30 +428,30 @@
 
 
 
-    jQuery('select[name="project_id"]').on("change", function () {
+    jQuery('select[name="project_id"]').on("change", function() {
         var project_id = jQuery(this).val();
         if (project_id) {
             jQuery.ajax({
                 url: "/projects/" + project_id + "/users/",
                 type: "GET",
                 dataType: "json",
-                success: function (data) {
+                success: function(data) {
                     jQuery('select[name="user_id"]').empty();
                     $('select[name="user_id"]').append(
                         '<option value="" selected>Selectionnez</option>'
                     );
-                    jQuery.each(data, function (key, value) {
+                    jQuery.each(data, function(key, value) {
                         $('select[name="user_id"]').append(
                             '<option value="' +
-                                value.id +
-                                '">' +
-                                value.name +
-                                " " +
-                                "</option>"
+                            value.id +
+                            '">' +
+                            value.name +
+                            " " +
+                            "</option>"
                         );
                     });
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.error(xhr);
                 },
             });

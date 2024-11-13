@@ -15,6 +15,7 @@ class ProjectsController extends Controller
 
     public function index()
     {
+
         $users = User::latest()->get();
         $projects = Project::all();
         $hight_projects = Project::where('priority', 'élevé')->get();
