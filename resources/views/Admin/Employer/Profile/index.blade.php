@@ -27,8 +27,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                z-index: -1;
-                                                                                            } */
+                                                                                                    z-index: -1;
+                                                                                                } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -109,7 +109,8 @@
                                                 <div class="project-block light-info-bg">
                                                     <i class="{{ $project->icon }}"></i>
                                                 </div>
-                                                <span class="small text-muted project_name fw-bold"> {{$project->nom }}
+                                                <span class="small text-muted project_name fw-bold">
+                                                    {{ $project->nom }}
                                                 </span>
                                                 <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->category }}</h6>
                                             </div>
@@ -126,7 +127,7 @@
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center">
                                                     <i class="icofont-paper-clip"></i>
-                                                    <span class="ms-2">{{ $project->tasks->count()}} Taches</span>
+                                                    <span class="ms-2">{{ $project->tasks->count() }} Taches</span>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -138,7 +139,8 @@
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center">
                                                     <i class="icofont-group-students "></i>
-                                                    <span class="ms-2">{{ $project->users()->count() }} Membres</span>
+                                                    <span class="ms-2">{{ $project->users()->count() }}
+                                                        Membres</span>
                                                 </div>
                                             </div>
                                             {{-- <div class="col-6">
@@ -155,14 +157,10 @@
                                                     class="icofont-ui-clock"></i> 35 Days Left</span>
                                         </div>
                                         <div class="progress" style="height: 8px;">
-                                            <div class="progress-bar bg-secondary" role="progressbar" style="width: 25%"
-                                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                            <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                style="width: 25%" aria-valuenow="30" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                            <div class="progress-bar bg-secondary ms-1" role="progressbar"
-                                                style="width: 10%" aria-valuenow="10" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-secondary" role="progressbar"
+                                                style="width: @if ($project->statut == 'debut') 5% @elseif($project->statut == 'encours') 50% @else 100% @endif;"
+                                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
