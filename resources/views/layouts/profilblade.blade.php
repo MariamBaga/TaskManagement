@@ -1,11 +1,13 @@
 <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center">
-    <div class="u-info me-2">
-        <!-- Affiche le nom complet de l'utilisateur connecté -->
-        <p class="mb-0 text-end line-height-sm">
-            <span class="font-weight-bold">{{ Auth::user()->name }}</span>
-        </p>
-        <small>Admin Profile</small>
-    </div>
+<div class="u-info me-2">
+    <!-- Affiche le nom complet de l'utilisateur connecté -->
+    <p class="mb-0 text-end line-height-sm">
+        <span class="font-weight-bold">{{ Auth::user()->name }}</span>
+    </p>
+    <!-- Affiche le rôle de l'utilisateur connecté -->
+    <small>{{ Auth::user()->role === 'admin' ? 'Admin Profile' : 'Utilisateur Standard' }}</small>
+</div>
+
     <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static">
         <!-- Utilise la photo de profil de l'utilisateur connecté -->
         <img class="avatar lg rounded-circle img-thumbnail" src="{{ Auth::user()->profile_picture_url ?? asset('assets/images/profile_av.png') }}" alt="profile">

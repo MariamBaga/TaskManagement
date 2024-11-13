@@ -27,33 +27,37 @@ Route::get('/dashboard', function () {
 
 
 Route::middleware('auth')->group(function () {
-    //define my config routes
-    Route::resource('projects', ProjectsController::class);
-    Route::resource('tasks', TaskController::class);
 
- Route::resource('employee', EmployeController::class);
+    // Routes pour la visualisation des projets (ouvertes à tous les utilisateurs authentifiés)
+    Route::resource('projects', ProjectsController::class)
+        ->only(['index', 'show']);
 
- Route::resource('employeeProfile', EmployeProfileController::class);
+    // Routes pour la gestion des projets (restreintes aux admins)
+    Route::resource('projects', ProjectsController::class)
+        ->only(['create', 'store', 'edit', 'update', 'destroy'])
+        ->middleware('role:admin');
 
- Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
-Route::get('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    // Routes pour la visualisation des tâches (ouvertes à tous les utilisateurs authentifiés)
+    Route::resource('tasks', TaskController::class)
+        ->only(['index', 'show']);
 
+    // Routes pour la gestion des tâches (restreintes aux admins)
+    Route::resource('tasks', TaskController::class)
+        ->only(['create', 'store', 'edit', 'update', 'destroy'])
+        ->middleware('role:admin');
 
-
-
-    //tâches des projets
-    // Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
-    // Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-    // Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-    // Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
-    // Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-    // Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
-    // Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-
+    // Autres routes, notifications et profil
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::resource('employee', EmployeController::class);
+
+        Route::resource('employeeProfile', EmployeProfileController::class);
 
 require __DIR__.'/auth.php';

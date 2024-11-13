@@ -20,12 +20,16 @@ class RolesAndUsersSeeder extends Seeder
         $adminRole = Role::create(['name' => 'admin']);
         $userRole = Role::create(['name' => 'utilisateur standard']);
 
-        // Créer des permissions
+        // Créer des permissions pour les tâches et les projets
         $permissions = [
             'create tasks',
             'edit tasks',
             'delete tasks',
-            'view tasks'
+            'view tasks',
+            'create projects',
+            'edit projects',
+            'delete projects',
+            'view projects'
         ];
 
         foreach ($permissions as $permission) {
@@ -35,8 +39,8 @@ class RolesAndUsersSeeder extends Seeder
         // Assigner toutes les permissions au rôle admin
         $adminRole->givePermissionTo(Permission::all());
 
-        // Assigner des permissions spécifiques au rôle utilisateur standard
-        $userRole->givePermissionTo(['view tasks']);
+        // Assigner uniquement les permissions de visualisation au rôle utilisateur standard
+        $userRole->givePermissionTo(['view tasks', 'view projects']);
 
         // Créer ou récupérer un utilisateur spécifique et lui assigner le rôle admin
         $user = User::firstOrCreate(
