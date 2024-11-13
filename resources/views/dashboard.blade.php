@@ -146,7 +146,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($projects as $project)
+                                            @foreach(auth()->user()->projects()->get() as $project)
                                             <tr>
                                                 <td><a href="{{ route('projects.index') }}">{{ $project->nom }}</a></td>
                                                 <td>{{ $project->date_debut->translatedFormat('d/m/Y') }}</td>

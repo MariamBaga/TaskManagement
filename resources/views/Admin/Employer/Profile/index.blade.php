@@ -27,8 +27,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                    z-index: -1;
-                                                                                                } */
+                                                                                                            z-index: -1;
+                                                                                                        } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -99,8 +99,8 @@
                 </div>
                 <h6 class="fw-bold  py-3 mb-3">Projet actuel</h6>
                 <div class="teachercourse-list">
-                    @foreach ($user->projects()->get() as $project)
-                        <div class="row g-3 gy-5 py-3 row-deck">
+                    <div class="row g-3 gy-5 py-3 row-deck">
+                        @foreach ($user->projects()->get() as $project)
                             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="card">
                                     <div class="card-body">
@@ -110,9 +110,9 @@
                                                     <i class="{{ $project->icon }}"></i>
                                                 </div>
                                                 <span class="small text-muted project_name fw-bold">
-                                                    {{ $project->nom }}
+                                                    {{ $project->category }}
                                                 </span>
-                                                <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->category }}</h6>
+                                                <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                             </div>
                                         </div>
                                         <div class="d-flex align-items-center">
@@ -165,9 +165,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-12 col-md-12">
