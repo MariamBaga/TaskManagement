@@ -29,8 +29,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                                                    z-index: -1;
-                                                                                                                                } */
+                                                                                                                                            z-index: -1;
+                                                                                                                                        } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -103,33 +103,19 @@
                                                     <div class="avatar-list avatar-list-stacked pt-2">
                                                         @foreach ($project->users as $user)
                                                             <img class="avatar rounded-circle sm"
-                                                                src="{{ $user->image }}" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar1.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar3.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar4.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar8.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar10.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar11.jpg" alt="">
-                                                            <img class="avatar rounded-circle sm"
-                                                                src="assets/images/xs/avatar6.jpg" alt="">
+                                                                src="{{ asset('storage/' . $user->image) }}" alt="">
                                                         @endforeach
-                                                        <span class="avatar rounded-circle text-center pointer sm"
+                                                        {{-- <span class="avatar rounded-circle text-center pointer sm"
                                                             data-bs-toggle="modal" data-bs-target="#addUser"><i
-                                                                class="icofont-ui-add"></i></span>
+                                                                class="icofont-ui-add"></i></span> --}}
                                                     </div>
                                                 </div>
                                                 <div class="row g-2 pt-4">
                                                     <div class="col-6">
                                                         <div class="d-flex align-items-center">
                                                             <i class="icofont-paper-clip"></i>
-                                                            <span class="ms-2">{{ $project->tasks->count() }}
-                                                                Attachement</span>
+                                                            <span class="ms-2">{{ $project->tasks->count()>1 ? $project->tasks->count()." tâches" : $project->tasks->count()." tâche" }}
+                                                                </span>
                                                         </div>
                                                     </div>
                                                     <div class="col-6">
@@ -147,12 +133,6 @@
                                                                 class="ms-2">{{ $project->users()->count() > 1 ? $project->users()->count() . ' Membres' : $project->users()->count() . ' Membre' }}</span>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="icofont-ui-text-chat"></i>
-                                                            <span class="ms-2">45</span>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="dividers-block"></div>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
@@ -164,14 +144,14 @@
                                                 </div>
                                                 <div class="progress" style="height: 8px;">
                                                     <div class="progress-bar bg-secondary" role="progressbar"
-                                                        style="width: 25%" aria-valuenow="15" aria-valuemin="0"
+                                                        style="width: @if($project->statut =='debut') 5% @elseif($project->statut =='encours') 50% @else 100% @endif;" aria-valuenow="15" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
-                                                    <div class="progress-bar bg-secondary ms-1" role="progressbar"
+                                                    {{-- <div class="progress-bar bg-secondary ms-1" role="progressbar"
                                                         style="width: 25%" aria-valuenow="30" aria-valuemin="0"
                                                         aria-valuemax="100"></div>
                                                     <div class="progress-bar bg-secondary ms-1" role="progressbar"
                                                         style="width: 20%" aria-valuenow="20" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
+                                                        aria-valuemax="100"></div> --}}
                                                 </div>
                                             </div>
                                         </div>

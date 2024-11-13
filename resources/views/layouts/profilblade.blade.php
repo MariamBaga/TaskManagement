@@ -27,16 +27,16 @@
                 </div>
             </div>
             <div class="list-group m-2">
-                <a href="{{ route('tasks.index') }}" class="list-group-item list-group-item-action border-0"><i class="icofont-tasks fs-5 me-3"></i>My Task</a>
-                <a href="{{ route('employee.index') }}" class="list-group-item list-group-item-action border-0"><i class="icofont-ui-user-group fs-6 me-3"></i>Members</a>
-                <a href="{{ route('logout') }}" class="list-group-item list-group-item-action border-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout fs-6 me-3"></i>Signout</a>
+                <a href="{{ route('users.show', auth()->user()->id ) }}" class="list-group-item list-group-item-action border-0"><i class="icofont-tasks fs-5 me-3"></i>Ma Tache</a>
+                {{-- <a href="{{ route('employee.index') }}" class="list-group-item list-group-item-action border-0"><i class="icofont-ui-user-group fs-6 me-3"></i>Membres</a> --}}
+                <a href="{{ route('logout') }}" class="list-group-item list-group-item-action border-0" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icofont-logout fs-6 me-3"></i>Déconnexion</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
                 <div>
                     <hr class="dropdown-divider border-dark">
                 </div>
-                <a href="{{ route('register') }}" class="list-group-item list-group-item-action border-0"><i class="icofont-contact-add fs-5 me-3"></i>Add personal account</a>
+                {{-- <a href="{{ route('register') }}" class="list-group-item list-group-item-action border-0"><i class="icofont-contact-add fs-5 me-3"></i>Add personal account</a> --}}
             </div>
         </div>
     </div>

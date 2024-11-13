@@ -52,8 +52,8 @@
                 <!-- Menu: Sous-menu ul -->
                 <ul class="sub-menu collapse @if (Route::is('users.index')) show @endif" id="emp-Components">
                     <li><a class="ms-link @if (Route::is('users.index')) active @endif" href="{{ route('users.index') }}"> <span>Utilisateurs</span></a></li>
-                    <li><a class="ms-link" href="{{ route('employeeProfile.index') }}"> <span>Profil des
-                                Membres</span></a></li>
+                    {{-- <li><a class="ms-link" href="{{ route('employeeProfile.index') }}"> <span>Profil des
+                                Membres</span></a></li> --}}
                 </ul>
             </li>
         </ul>

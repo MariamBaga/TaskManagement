@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('budjet');
             $table->string('icon');
             $table->string('description')->nullable();
-            $table->string('statut')->nullable();
+            $table->string('statut')->default('debut');
             $table->date('date_debut');
             $table->date('date_fin');
             $table->timestamps();

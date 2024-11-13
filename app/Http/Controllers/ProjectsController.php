@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 class ProjectsController extends Controller
 {
 
-   
-
-
-
     public function index()
     {
         $users = User::latest()->get();
@@ -48,7 +44,9 @@ class ProjectsController extends Controller
             'category' => 'required|string',
         ]);
 
-        $project = Project::create($request->all());
+        $project = new Project($request->all());
+        $project->statut = "debut";
+        $project->save();
 
         // Attacher les utilisateurs assignés au projet
         foreach ($request->users as $user_id) {

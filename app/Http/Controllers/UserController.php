@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -55,6 +56,7 @@ class UserController extends Controller
             $image = $request->file('image')->store('users');
             $user = new User($request->all());
             $user->image = $image;
+            $user->password = Hash::make($request->password);
             $user->save();
             return back()->with('success', 'Utilisateur crée avec succès');
         }
