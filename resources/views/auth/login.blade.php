@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="fr" dir="ltr">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>My-Task - Sign in</title>
+    <title>Ma-Tâche - Connexion</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/my-task.style.min.css">
 </head>
@@ -25,7 +25,7 @@
                                         <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
                                     </svg>
                                 </div>
-                                <h2 class="color-900 text-center">My-Task - Let's Manage Better</h2>
+                                <h2 class="color-900 text-center">Ma-Tâche - Gérons Mieux Ensemble</h2>
                                 <img src="../assets/images/login-img.svg" alt="login-img">
                             </div>
                         </div>
@@ -34,28 +34,28 @@
                                 <form method="POST" action="{{ route('login') }}" class="row g-1 p-3 p-md-4">
                                     @csrf
                                     <div class="col-12 text-center mb-1 mb-lg-5">
-                                        <h1>Sign in</h1>
-                                        <span>Free access to our dashboard.</span>
+                                        <h1>Connexion</h1>
+                                        <span>Accès gratuit à notre tableau de bord.</span>
                                     </div>
                                     <div class="col-12 text-center mb-4">
                                         <a class="btn btn-lg btn-outline-secondary btn-block" href="#">
                                             <span class="d-flex justify-content-center align-items-center">
                                                 <img class="avatar xs me-2" src="../assets/images/google.svg" alt="Image Description">
-                                                Sign in with Google
+                                                Connexion avec Google
                                             </span>
                                         </a>
-                                        <span class="dividers text-muted mt-4">OR</span>
+                                        <span class="dividers text-muted mt-4">OU</span>
                                     </div>
                                     <div class="col-12">
                                         <div class="mb-2">
-                                            <label class="form-label" for="email">Email address</label>
-                                            <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="name@example.com" required autofocus>
+                                            <label class="form-label" for="email">Adresse e-mail</label>
+                                            <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="nom@exemple.com" required autofocus>
                                             @error('email') <span class="text-danger mt-2">{{ $message }}</span> @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="mb-2">
-                                            <label class="form-label" for="password">Password</label>
+                                            <label class="form-label" for="password">Mot de passe</label>
                                             <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="***************" required>
                                             @error('password') <span class="text-danger mt-2">{{ $message }}</span> @enderror
                                         </div>
@@ -63,19 +63,19 @@
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="remember_me" name="remember">
-                                            <label class="form-check-label" for="remember_me">Remember me</label>
+                                            <label class="form-check-label" for="remember_me">Se souvenir de moi</label>
                                         </div>
                                     </div>
                                     <div class="col-12 text-center mt-4">
-                                        <button type="submit" class="btn btn-lg btn-block btn-light lift text-uppercase">SIGN IN</button>
+                                        <button type="submit" class="btn btn-lg btn-block btn-light lift text-uppercase">SE CONNECTER</button>
                                     </div>
                                     <div class="col-12 text-center mt-4">
-                                        <span class="text-muted">Don't have an account yet? <a href="{{ route('register') }}" class="text-secondary">Sign up here</a></span>
+                                        <span class="text-muted">Vous n'avez pas encore de compte ? <a href="{{ route('register') }}" class="text-secondary">Inscrivez-vous ici</a></span>
                                     </div>
                                 </form>
                             </div>
                         </div>
-                    </div> <!-- End Row -->
+                    </div> <!-- Fin de la ligne -->
                 </div>
             </div>
         </div>

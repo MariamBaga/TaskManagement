@@ -12,20 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('notifications', function (Blueprint $table) {
-             // Ajouter une colonne 'id' de type UUID si vous utilisez UUID
-             $table->uuid('id')->primary();  // Définir la clé primaire
-             $table->string('notifiable_type');
-             $table->unsignedBigInteger('notifiable_id');
-             $table->string('type');
-             $table->string('user_name')->nullable();
-             $table->text('message')->nullable();
-             $table->json('data');
-             $table->string('url')->nullable()->change();
-             $table->timestamp('read_at')->nullable();
-             $table->timestamps();
+            $table->id();  // Clé primaire
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Relation avec l'utilisateur
+            $table->string('type');  // Type de notification (ex: 'Project Created')
+            $table->string('user_name')->nullable();  // Nom de l'utilisateur
+            $table->text('message');  // Message de notification
+            $table->json('data')->nullable();  // Données supplémentaires pour la notification
+            $table->timestamp('read_at')->nullable();  // Date de lecture
+            $table->timestamps();  // Pour les dates de création et de mise à jour
 
-             // Ajouter une contrainte pour la relation polymorphique
-             $table->index(['notifiable_type', 'notifiable_id']);
         });
     }
 
