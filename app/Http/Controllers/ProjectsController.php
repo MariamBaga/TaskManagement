@@ -16,12 +16,6 @@ class ProjectsController extends Controller
     public function __construct()
     {
         
-
-        // Seuls les admins peuvent créer, modifier et supprimer des tâches
-        $this->middleware('role:admin')->only(['create', 'store', 'edit', 'update', 'destroy']);
-
-        // Tous les utilisateurs authentifiés peuvent voir les tâches
-        $this->middleware('auth')->only(['index', 'show']);
     }
 
 
@@ -57,7 +51,9 @@ class ProjectsController extends Controller
             'category' => 'required|string',
         ]);
 
-        $project = Project::create($request->all());
+        $project = new Project($request->all());
+        $project->statut = "debut";
+        $project->save();
 
         // Attacher les utilisateurs assignés au projet
         foreach ($request->users as $user_id) {

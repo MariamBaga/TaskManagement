@@ -11,16 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-     public function __construct()
-    {
-       
-
-        // Seuls les admins peuvent créer, modifier et supprimer des tâches
-        $this->middleware('role:admin')->only(['create', 'store', 'edit', 'update', 'destroy']);
-
-        // Tous les utilisateurs authentifiés peuvent voir les tâches
-        $this->middleware('auth')->only(['index', 'show']);
-    }
+    public function __construct() {}
     // Afficher toutes les tâches
     public function index()
     {
@@ -29,8 +20,8 @@ class TaskController extends Controller
         $tasksCompleted = Task::with('project', 'user')->where('statut', 'complet')->get();
         $tasks = Task::latest()->get();
 
-         // Récupérer les notifications de l'utilisateur connecté
-         $notifications = Auth::user()->notifications()->latest()->get();
+        // Récupérer les notifications de l'utilisateur connecté
+        $notifications = Auth::user()->notifications()->latest()->get();
         // Charger les projets et utilisateurs pour le modal de création
         $projects = Project::all();
         $users = User::all();
@@ -58,7 +49,7 @@ class TaskController extends Controller
             'user_id' => 'required|exists:users,id',
         ]);
 
-        Task::create([
+        $task = Task::create([
             'titre' => $request->titre,
             'description' => $request->description,
             'statut' => $request->statut,
@@ -66,6 +57,10 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
             'user_id' => $request->user_id,
         ]);
+
+        $task->project->statut = "encours";
+        $task->project->save();
+
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
     }
@@ -104,6 +99,20 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
             'user_id' => $request->user_id,
         ]);
+
+        $project =  $task->project;
+        $uncompletedTasks = $project->tasks->filter(function ($task) {
+            if ($task->statut != "complet")
+                return $task;
+        })->count();
+
+        if ($uncompletedTasks == 0) {
+            $project->statut = "complet";
+            $project->save();
+        } else {
+            $project->statut = "encours";
+            $project->save();
+        }
 
         return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
     }

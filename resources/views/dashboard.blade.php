@@ -46,7 +46,7 @@
                                         <div class="">Tâches Terminées</div>
                                         <h5 class="mb-0 ">{{ $tasks->where('statut', 'complet')->count()}}</h5>
                                     </div>
-                                    <a href="task.html" title="espace-utilisé" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
+                                    <a href="{{ route('tasks.index') }}" title="espace-utilisé" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                         <div class="">Tâches en Cours</div>
                                         <h5 class="mb-0 ">{{ $tasks->where('statut', 'encours')->count()}}</h5>
                                     </div>
-                                    <a href="task.html" title="date-de-renouvellement" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
+                                    <a href="{{ route('tasks.index') }}" title="date-de-renouvellement" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
                                                 <td><img src="{{ $project->users->first()->image }}" alt="Avatar" class="avatar sm  rounded-circle me-2"><a href="#">{{ $project->users->first()->name }}</a></td>
                                                 <td>
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"  style="width: 78%;">78%</div>
+                                                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"  style="width: @if($project->statut =='debut') 5% @elseif($project->statut =='encours') 50% @else 100% @endif;">@if($project->statut =='debut') 5% @elseif($project->statut =='encours') 50% @else 100% @endif</div>
                                                     </div>
                                                 </td>
                                                 <td><span class="badge @if($project->priority == 'élévé') bg-danger @elseif($project->priority == 'Moyenne') bg-warning @else bg-success @endif">{{ $project->priority }}</span></td>
