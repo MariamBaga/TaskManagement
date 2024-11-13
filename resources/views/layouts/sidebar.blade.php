@@ -44,7 +44,7 @@
             </li>
 
 
-
+@admin
             <li class="collapsed">
                 <a class="m-link @if (Route::is('users.index')) active @endif" data-bs-toggle="collapse" data-bs-target="#emp-Components" href="#"><i
                         class="icofont-users-alt-5"></i> <span>Comptes</span> <span
@@ -56,6 +56,8 @@
                                 Membres</span></a></li> --}}
                 </ul>
             </li>
+
+            @endadmin
         </ul>
     </div>
 </div>

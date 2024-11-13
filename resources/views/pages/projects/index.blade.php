@@ -40,6 +40,13 @@
 </head>
 @endsection
 @section('content')
+
+@if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 <div class="body d-flex py-lg-3 py-md-2">
     <div class="container-xxl">
         <div class="row align-items-center">
@@ -48,9 +55,9 @@
                     class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                     <h3 class="fw-bold py-3 mb-0">Projets</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
-                        <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
+                        @admin<button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
                             data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
-                            Un Projet</button>
+                            Un Projet</button> @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
                                     role="tab">Tous</a></li>
@@ -87,6 +94,7 @@
                                                         </span>
                                                         <h6 class="mb-0 fw-bold  fs-6  mb-2">{{ $project->nom }}</h6>
                                                     </div>
+                                                    @admin
                                                     <div class="btn-group" role="group"
                                                         aria-label="Basic outlined example">
                                                         <button type="button" class="btn btn-outline-secondary"
@@ -98,6 +106,7 @@
                                                             data-bs-target="#deleteproject{{ $project->id }}"><i
                                                                 class="icofont-ui-delete text-danger"></i></button>
                                                     </div>
+                                                    @endadmin
                                                 </div>
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-list avatar-list-stacked pt-2">

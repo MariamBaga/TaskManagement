@@ -20,9 +20,13 @@
 
 @section('content')
 
-@if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
+
+
+@if (session('error'))
+    <div class="alert alert-error alert-dismissible fade show" role="alert">
+
+    {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
 
@@ -66,7 +70,7 @@
                                     <div class="avatar lg  rounded-1 no-thumbnail bg-lightgreen color-defult"><i class="bi bi-clipboard-data fs-4"></i></div>
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches en Cours</div>
-                                        <h5 class="mb-0 ">{{ $tasks->whereIn('statut', ['encours', 'review'])->count()}}</h5>
+                                        <h5 class="mb-0 ">{{ $tasks->where('statut', 'encours')->count()}}</h5>
                                     </div>
                                     <a href="{{ route('tasks.index') }}" title="date-de-renouvellement" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>

@@ -34,6 +34,7 @@ class ProjectNotification extends Notification
             'message' => $this->userName . ' a créé un projet : ' . $this->project->name,
             'project_id' => $this->project->id,
             'status' => $this->status,
+            
             'message' => "{$this->userName} a créé un projet : {$this->project->name}", // Utilisez $this->userName ici
             'url' => url('/projects/' . $this->project->id), // L'URL doit être correctement générée
         ];
