@@ -21,6 +21,7 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
+
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     //define my config routes
     Route::resource('projects', ProjectsController::class);
@@ -32,7 +33,13 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('employeeProfile', EmployeProfileController::class);
 
-//  
+//
+
+
+    // Routes pour la gestion des tâches (restreintes aux admins)
+    Route::resource('tasks', TaskController::class)
+        ->only(['create', 'store', 'edit', 'update', 'destroy'])
+        ->middleware('role:admin');
 
     // Autres routes, notifications et profil
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
@@ -44,3 +51,4 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-    public function __construct() {}
+   
     // Afficher toutes les tâches
     public function index()
     {
