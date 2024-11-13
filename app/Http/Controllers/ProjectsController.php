@@ -13,6 +13,8 @@ class ProjectsController extends Controller
 {
     public function index()
     {
+
+
         $users = User::latest()->get();
         $projects = Project::all();
         $hight_projects = Project::where('priority', 'élevé')->get();
@@ -46,14 +48,12 @@ class ProjectsController extends Controller
         // Attacher les utilisateurs assignés au projet
         $project->users()->attach($request->users);
 
-        // Envoyer la notification aux utilisateurs assignés, sauf l'utilisateur actuel
-        foreach ($project->users as $user) {
-            if ($user->id !== Auth::id()) {
-                $notificationId = Str::uuid();
-                // Passer le bon nombre d'arguments au constructeur de la notification
-                $user->notify(new ProjectNotification($project, 'created', $user->id, $notificationId));
-            }
-        }
+         // Envoyer la notification aux utilisateurs assignés
+    foreach ($project->users as $user) {
+        $notificationId = Str::uuid();
+        // Envoyer la notification à tous les utilisateurs, y compris l'utilisateur actuel
+        $user->notify(new ProjectNotification($project, 'created', Auth::user(), $notificationId));
+    }
 
         return back()->with('success', 'Projet créé avec succès');
     }
@@ -79,14 +79,11 @@ class ProjectsController extends Controller
         // Mettre à jour les utilisateurs assignés au projet
         $project->users()->sync($request->users);
 
-        // Envoyer une notification de mise à jour aux utilisateurs assignés, sauf l'utilisateur actuel
-        foreach ($project->users as $user) {
-            if ($user->id !== Auth::id()) {
-                $notificationId = Str::uuid();
-                // Passer le bon nombre d'arguments au constructeur de la notification
-                $user->notify(new ProjectNotification($project, 'updated', $user->id, $notificationId));
-            }
-        }
+        // Envoyer une notification de mise à jour à tous les utilisateurs, y compris l'utilisateur actuel
+    foreach ($project->users as $user) {
+        $notificationId = Str::uuid();
+        $user->notify(new ProjectNotification($project, 'updated',  Auth::user(), $notificationId));
+    }
 
         return back()->with('success', 'Projet mis à jour avec succès');
     }
@@ -99,14 +96,12 @@ class ProjectsController extends Controller
         // Supprimer le projet
         $project->delete();
 
-        // Envoyer des notifications de suppression aux utilisateurs affectés, sauf l'utilisateur actuel
-        foreach ($assignedUsers as $user) {
-            if ($user->id !== Auth::id()) {
-                $notificationId = Str::uuid();
-                // Passer le bon nombre d'arguments au constructeur de la notification
-                $user->notify(new ProjectNotification($project, 'deleted', $user->id, $notificationId));
-            }
-        }
+
+    // Envoyer des notifications de suppression à tous les utilisateurs affectés, y compris l'utilisateur actuel
+    foreach ($assignedUsers as $user) {
+        $notificationId = Str::uuid();
+        $user->notify(new ProjectNotification($project, 'deleted',  Auth::user(), $notificationId));
+    }
 
         return back()->with('success', 'Projet supprimé avec succès');
     }

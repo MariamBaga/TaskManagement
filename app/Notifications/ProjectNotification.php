@@ -31,9 +31,10 @@ class ProjectNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => "Un projet a été {$this->status} : ",
+            'message' => "Un projet nommé '{$this->project->nom}' a été {$this->status}.",
             'project_id' => $this->project->id,
             'status' => $this->status,
+            'user_name' => $this->userId->name,
             'url' => url("/projects/{$this->project->id}"),
             'user_id' => $this->userId, // Inclure user_id ici
         ];
@@ -42,10 +43,12 @@ class ProjectNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'message' => "Un projet a été {$this->status} : ",
+            'message' => "Un projet nommé '{$this->project->nom}' a été {$this->status}.",
             'project_id' => $this->project->id,
             'status' => $this->status,
-            'url' => url("/projects/{$this->project->id}") ?? 'default_url',  
+
+            'user_name' => $this->userId->name,
+            'url' => url("/projects/{$this->project->id}") ?? 'default_url',
             'user_id' => $this->userId, // Inclure user_id ici aussi
         ];
     }
