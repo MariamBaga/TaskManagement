@@ -32,8 +32,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('employeeProfile', EmployeProfileController::class);
 
- Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
-Route::get('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+//  
 
 
 

@@ -1,3 +1,6 @@
+@php
+    $notifications = Auth::user()->notifications()->latest()->get();
+@endphp
 <!doctype html>
 <html class="no-js" lang="en" dir="ltr">
 
