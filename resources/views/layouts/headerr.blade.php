@@ -6,8 +6,7 @@
             <div class="h-right d-flex align-items-center mr-5 mr-lg-0 order-1">
 
                 <div class="dropdown notifications">
-                    <a class="nav-link dropdown-toggle pulse" href="#" role="button"
-                        data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle pulse" href="#" role="button" data-bs-toggle="dropdown">
                         <i class="icofont-alarm fs-5"></i>
                         <span class="pulse-ring"></span>
                     </a>
@@ -25,16 +24,15 @@
                                     <ul class="list-unstyled list mb-0">
                                         <li class="py-2 mb-1 border-bottom">
                                             <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle"
-                                                    src="assets/images/xs/avatar1.jpg" alt="">
+                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar1.jpg"
+                                                    alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
                                                             class="font-weight-bold">{{ auth()->user()->name }}</span>
                                                         <small>2MIN</small>
                                                     </p>
                                                     <span class="">Added 2021-02-19 my-Task ui/ux
-                                                        Design <span
-                                                            class="badge bg-success">Review</span></span>
+                                                        Design <span class="badge bg-success">Review</span></span>
                                                 </div>
                                             </a>
                                         </li>
@@ -53,8 +51,8 @@
                                         </li>
                                         <li class="py-2 mb-1 border-bottom">
                                             <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle"
-                                                    src="assets/images/xs/avatar3.jpg" alt="">
+                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar3.jpg"
+                                                    alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
                                                             class="font-weight-bold">Andrea Gill</span>
@@ -67,8 +65,8 @@
                                         </li>
                                         <li class="py-2 mb-1 border-bottom">
                                             <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle"
-                                                    src="assets/images/xs/avatar5.jpg" alt="">
+                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar5.jpg"
+                                                    alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
                                                             class="font-weight-bold">Diane Fisher</span>
@@ -81,8 +79,8 @@
                                         </li>
                                         <li class="py-2 mb-1 border-bottom">
                                             <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle"
-                                                    src="assets/images/xs/avatar6.jpg" alt="">
+                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar6.jpg"
+                                                    alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
                                                             class="font-weight-bold">Andrea Gill</span>
@@ -95,8 +93,8 @@
                                         </li>
                                         <li class="py-2">
                                             <a href="javascript:void(0);" class="d-flex">
-                                                <img class="avatar rounded-circle"
-                                                    src="assets/images/xs/avatar7.jpg" alt="">
+                                                <img class="avatar rounded-circle" src="assets/images/xs/avatar7.jpg"
+                                                    alt="">
                                                 <div class="flex-fill ms-2">
                                                     <p class="d-flex justify-content-between mb-0 "><span
                                                             class="font-weight-bold">Zoe Wright</span>
@@ -116,26 +114,25 @@
                 </div>
                 <div class="dropdown user-profile ml-2 ml-sm-3 d-flex align-items-center">
                     <div class="u-info me-2">
-                        <p class="mb-0 text-end line-height-sm "><span class="font-weight-bold">Dylan
-                                Hunter</span></p>
-                        <small>Admin Profile</small>
+                        <p class="mb-0 text-end line-height-sm "><span
+                                class="font-weight-bold">{{ auth()->user()->name }}</span></p>
+                        <small>{{ auth()->user()->role }}</small>
                     </div>
                     <a class="nav-link dropdown-toggle pulse p-0" href="#" role="button"
                         data-bs-toggle="dropdown" data-bs-display="static">
-                        <img class="avatar lg rounded-circle img-thumbnail"
-                            src="assets/images/profile_av.png" alt="profile">
+                        <img class="avatar lg rounded-circle img-thumbnail" src="assets/images/profile_av.png"
+                            alt="profile">
                     </a>
-                    <div
-                        class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
+                    <div class="dropdown-menu rounded-lg shadow border-0 dropdown-animation dropdown-menu-end p-0 m-0">
                         <div class="card border-0 w280">
                             <div class="card-body pb-0">
                                 <div class="d-flex py-1">
                                     <img class="avatar rounded-circle" src="assets/images/profile_av.png"
                                         alt="profile">
                                     <div class="flex-fill ms-3">
-                                        <p class="mb-0"><span class="font-weight-bold">Dylan
-                                                Hunter</span></p>
-                                        <small class="">Dylan.hunter@gmail.com</small>
+                                        <p class="mb-0"><span
+                                                class="font-weight-bold">{{ auth()->user()->name }}</span></p>
+                                        <small class="">{{ auth()->user()->email }}</small>
                                     </div>
                                 </div>
 
@@ -144,21 +141,22 @@
                                 </div>
                             </div>
                             <div class="list-group m-2 ">
-                                <a href="task.html"
-                                    class="list-group-item list-group-item-action border-0 "><i
-                                        class="icofont-tasks fs-5 me-3"></i>My Task</a>
-                                <a href="members.html"
-                                    class="list-group-item list-group-item-action border-0 "><i
-                                        class="icofont-ui-user-group fs-6 me-3"></i>members</a>
-                                <a href="ui-elements/auth-signin.html"
-                                    class="list-group-item list-group-item-action border-0 "><i
-                                        class="icofont-logout fs-6 me-3"></i>Signout</a>
+                                <a href="task.html" class="list-group-item list-group-item-action border-0 "><i
+                                        class="icofont-tasks fs-5 me-3"></i>Mes Taches</a>
+                                <a href="members.html" class="list-group-item list-group-item-action border-0 "><i
+                                        class="icofont-ui-user-group fs-6 me-3"></i>membres</a>
+                                <form action="{{ route('logout') }}" method="post">
+                                    @csrf
+                                    <button
+                                        class="list-group-item list-group-item-action border-0 " type="submit"><i
+                                            class="icofont-logout fs-6 me-3"></i>Deconnexion</button>
+                                </form>
                                 <div>
                                     <hr class="dropdown-divider border-dark">
                                 </div>
                                 <a href="ui-elements/auth-signup.html"
                                     class="list-group-item list-group-item-action border-0 "><i
-                                        class="icofont-contact-add fs-5 me-3"></i>Add personal account</a>
+                                        class="icofont-contact-add fs-5 me-3"></i>Ajouter un compte personnel</a>
                             </div>
                         </div>
                     </div>
@@ -166,9 +164,9 @@
                 <div class="px-md-1">
                     <a href="#offcanvas_setting" data-bs-toggle="offcanvas" aria-expanded="false"
                         title="template setting">
-                        <svg class="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="22"
-                            height="22" viewBox="0 0 24 24" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="svg-stroke" xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                            viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                             <path
                                 d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z">
@@ -180,8 +178,8 @@
             </div>
 
             <!-- menu toggler -->
-            <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button"
-                data-bs-toggle="collapse" data-bs-target="#mainHeader">
+            <button class="navbar-toggler p-0 border-0 menu-toggle order-3" type="button" data-bs-toggle="collapse"
+                data-bs-target="#mainHeader">
                 <span class="fa fa-bars"></span>
             </button>
 
@@ -190,11 +188,10 @@
                 <div class="input-group flex-nowrap input-group-lg">
                     <button type="button" class="input-group-text" id="addon-wrapping"><i
                             class="fa fa-search"></i></button>
-                    <input type="search" class="form-control" placeholder="Search" aria-label="search"
+                    <input type="search" class="form-control" placeholder="Rechercher" aria-label="search"
                         aria-describedby="addon-wrapping">
                     <button type="button" class="input-group-text add-member-top" id="addon-wrappingone"
-                        data-bs-toggle="modal" data-bs-target="#addUser"><i
-                            class="fa fa-plus"></i></button>
+                        data-bs-toggle="modal" data-bs-target="#addUser"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
 

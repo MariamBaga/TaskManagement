@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles; 
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -22,6 +22,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'description',
+        'started_at',
+        'profile',
+        'image',
         'password',
     ];
 
@@ -54,9 +58,9 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'affecters')
-        ->as('affectations')
-        ->using(Affecter::class)
-        ->withTimestamps();
+            ->as('affectations')
+            ->using(Affecter::class)
+            ->withTimestamps();
     }
 
     public function tasks()

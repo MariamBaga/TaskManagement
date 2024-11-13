@@ -321,7 +321,7 @@
                         <!-- Project Name -->
                         <div class="mb-3">
                             <label class="form-label">Nom du projet</label>
-                            <select name="project_id" class="form-select @error('project_id') is-invalid @enderror">
+                            <select name="project_id" id="create_task" class="form-select @error('project_id') is-invalid @enderror">
                                 <option selected disabled>Sélectionner un projet</option>
                                 @foreach ($projects as $project)
                                     <option value="{{ $project->id }}"
@@ -378,11 +378,6 @@
                             <label class="form-label">Attribuer à</label>
                             <select name="user_id" class="form-select @error('user_id') is-invalid @enderror"
                                 required>
-                                @foreach ($users as $user)
-                                    <option value="{{ $user->id }}"
-                                        {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}
-                                    </option>
-                                @endforeach
                             </select>
                             @error('user_id')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -548,6 +543,40 @@
 <script>
     $(document).ready(function() {
         $('.select2-icon').select2();
+    });
+
+
+
+    jQuery('select[name="project_id"]').on("change", function () {
+        var project_id = jQuery(this).val();
+        if (project_id) {
+            jQuery.ajax({
+                url: "/projects/" + project_id + "/users/",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    jQuery('select[name="user_id"]').empty();
+                    $('select[name="user_id"]').append(
+                        '<option value="" selected>Selectionnez</option>'
+                    );
+                    jQuery.each(data, function (key, value) {
+                        $('select[name="user_id"]').append(
+                            '<option value="' +
+                                value.id +
+                                '">' +
+                                value.name +
+                                " " +
+                                "</option>"
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr);
+                },
+            });
+        } else {
+            $('select[name="student_code"]').empty();
+        }
     });
 </script>
 @endsection

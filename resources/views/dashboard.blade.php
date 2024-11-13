@@ -30,9 +30,9 @@
                                     <div class="avatar lg  rounded-1 no-thumbnail bg-lightyellow color-defult"><i class="bi bi-journal-check fs-4"></i></div>
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Totales</div>
-                                        <h5 class="mb-0 ">122</h5>
+                                        <h5 class="mb-0 ">{{ $tasks->count() }}</h5>
                                     </div>
-                                    <a href="task.html" title="voir-les-membres" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
+                                    <a href="{{ route('tasks.index') }}" title="voir-les-membres" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                                     <div class="avatar lg  rounded-1 no-thumbnail bg-lightblue color-defult"><i class="bi bi-list-check fs-4"></i></div>
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Terminées</div>
-                                        <h5 class="mb-0 ">376</h5>
+                                        <h5 class="mb-0 ">{{ $tasks->where('statut', 'complet')->count()}}</h5>
                                     </div>
                                     <a href="task.html" title="espace-utilisé" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
@@ -58,7 +58,7 @@
                                     <div class="avatar lg  rounded-1 no-thumbnail bg-lightgreen color-defult"><i class="bi bi-clipboard-data fs-4"></i></div>
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches en Cours</div>
-                                        <h5 class="mb-0 ">74</h5>
+                                        <h5 class="mb-0 ">{{ $tasks->where('statut', 'encours')->count()}}</h5>
                                     </div>
                                     <a href="task.html" title="date-de-renouvellement" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
@@ -74,7 +74,7 @@
                                 <i class="icofont-data fs-3"></i>
                                 <div class="d-flex flex-column ms-3">
                                     <h6 class="mb-0">Projets Totaux</h6>
-                                    <span class="text-white">550</span>
+                                    <span class="text-white">{{ $projects->count() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -84,8 +84,8 @@
                             <div class="card-body text-white d-flex align-items-center">
                                 <i class="icofont-chart-flow fs-3"></i>
                                 <div class="d-flex flex-column ms-3">
-                                    <h6 class="mb-0">Projets à Venir</h6>
-                                    <span class="text-white">210</span>
+                                    <h6 class="mb-0">Projets à venir</h6>
+                                    <span class="text-white">{{ $projects->where('statut', 'debut')->count()}}</span>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                                 <i class="icofont-chart-flow-2 fs-3"></i>
                                 <div class="d-flex flex-column ms-3">
                                     <h6 class="mb-0">Projets en Cours</h6>
-                                    <span class="text-white">8456 Fichiers</span>
+                                    <span class="text-white">{{ $projects->where('statut', 'encours')->count() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                 <i class="icofont-tasks fs-3"></i>
                                 <div class="d-flex flex-column ms-3">
                                     <h6 class="mb-0">Projets Terminés</h6>
-                                    <span class="text-white">88 Fichiers</span>
+                                    <span class="text-white">{{ $projects->where('statut', 'complet')->count() }}</span>
                                 </div>
                             </div>
                         </div>
@@ -134,30 +134,21 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($projects as $project)
                                             <tr>
-                                                <td><a href="projects.html">Social Geek Made</a></td>
-                                                <td>10-01-2021</td>
-                                                <td>4 Mois</td>
-                                                <td><img src="assets/images/xs/avatar1.jpg" alt="Avatar" class="avatar sm  rounded-circle me-2"><a href="#">Keith</a></td>
+                                                <td><a href="{{ route('projects.index') }}">{{ $project->nom }}</a></td>
+                                                <td>{{ $project->date_debut->translatedFormat('d/m/Y') }}</td>
+                                                <td>{{ $project->date_fin->translatedFormat('d/m/Y') }}</td>
+                                                <td><img src="{{ $project->users->first()->image }}" alt="Avatar" class="avatar sm  rounded-circle me-2"><a href="#">{{ $project->users->first()->name }}</a></td>
                                                 <td>
                                                     <div class="progress">
                                                         <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"  style="width: 78%;">78%</div>
                                                     </div>
                                                 </td>
-                                                <td><span class="badge bg-warning">MOYENNE</span></td>
+                                                <td><span class="badge @if($project->priority == 'élévé') bg-danger @elseif($project->priority == 'Moyenne') bg-warning @else bg-success @endif">{{ $project->priority }}</span></td>
                                             </tr>
-                                            <tr>
-                                                <td><a href="projects.html">Practice to Perfect</a></td>
-                                                <td>12-02-2021</td>
-                                                <td>1 Mois</td>
-                                                <td><img src="assets/images/xs/avatar2.jpg" alt="Avatar" class="avatar sm rounded-circle me-2"><a href="#">Colin</a></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar  bg-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">80%</div>
-                                                    </div>
-                                                </td>
-                                                <td><span class="badge bg-success">FAIBLE</span></td>
-                                            </tr>
+                                            @endforeach
+                                            
 
                                         </tbody>
                                     </table>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->string('statut');
             $table->date('date_echeance');
-            $table->foreignIdFor(Project::class)->constrained();
+            $table->foreignIdFor(Project::class)->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignIdFor(User::class)->constrained();
             $table->timestamps();
         });
