@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="no-js" lang="en" dir="ltr">
+<html class="no-js" lang="fr" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>:: My-Task:: Signup</title>
+    <title>:: My-Task:: Inscription</title>
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../assets/css/my-task.style.min.css">
 </head>
@@ -26,9 +26,9 @@
                                 </svg>
                             </div>
                             <div class="mb-5">
-                                <h2 class="color-900 text-center">My-Task Let's Management Better</h2>
+                                <h2 class="color-900 text-center">My-Task - Gérons Mieux</h2>
                             </div>
-                            <img src="../assets/images/login-img.svg" alt="login-img">
+                            <img src="../assets/images/login-img.svg" alt="image-login">
                         </div>
                     </div>
 
@@ -37,46 +37,46 @@
                             <form method="POST" action="{{ route('register') }}" class="row g-1 p-3 p-md-4">
                                 @csrf
                                 <div class="col-12 text-center mb-1 mb-lg-5">
-                                    <h1>Create your account</h1>
-                                    <span>Free access to our dashboard.</span>
+                                    <h1>Créer votre compte</h1>
+                                    <span>Accès gratuit à notre tableau de bord.</span>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-2">
-                                        <label class="form-label">Name</label>
-                                        <input type="text" name="name" class="form-control form-control-lg" placeholder="John Doe" required>
+                                        <label class="form-label">Nom</label>
+                                        <input type="text" name="name" class="form-control form-control-lg" placeholder="Jean Dupont" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-2">
-                                        <label class="form-label">Email address</label>
-                                        <input type="email" name="email" class="form-control form-control-lg" placeholder="name@example.com" required>
+                                        <label class="form-label">Adresse e-mail</label>
+                                        <input type="email" name="email" class="form-control form-control-lg" placeholder="nom@exemple.com" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-2">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" name="password" class="form-control form-control-lg" placeholder="8+ characters required" required>
+                                        <label class="form-label">Mot de passe</label>
+                                        <input type="password" name="password" class="form-control form-control-lg" placeholder="8 caractères minimum" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-2">
-                                        <label class="form-label">Confirm Password</label>
-                                        <input type="password" name="password_confirmation" class="form-control form-control-lg" placeholder="8+ characters required" required>
+                                        <label class="form-label">Confirmer le mot de passe</label>
+                                        <input type="password" name="password_confirmation" class="form-control form-control-lg" placeholder="8 caractères minimum" required>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" required>
                                         <label class="form-check-label">
-                                            I accept the <a href="#" class="text-secondary">Terms and Conditions</a>
+                                            J'accepte les <a href="#" class="text-secondary">Termes et Conditions</a>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-lg btn-block btn-light text-uppercase">SIGN UP</button>
+                                    <button type="submit" class="btn btn-lg btn-block btn-light text-uppercase">S'INSCRIRE</button>
                                 </div>
                                 <div class="col-12 text-center mt-4">
-                                    <span class="text-muted">Already have an account? <a href="{{ route('login') }}" class="text-secondary">Sign in here</a></span>
+                                    <span class="text-muted">Vous avez déjà un compte ? <a href="{{ route('login') }}" class="text-secondary">Connectez-vous ici</a></span>
                                 </div>
                             </form>
                         </div>
