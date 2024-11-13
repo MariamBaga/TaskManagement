@@ -2,21 +2,24 @@
 
 namespace App\Notifications;
 
+use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\DatabaseMessage;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ProjectNotification extends Notification
 {
+    use Queueable;
+
     private $project;
     private $status;
-    private $userName;
+    private $userId;
     private $notificationId;
 
-    public function __construct($project, $status, $userName, $notificationId)
+    public function __construct($project, $status, $userId, $notificationId)
     {
         $this->project = $project;
         $this->status = $status;
-        $this->userName = $userName;
+        $this->userId = $userId;
         $this->notificationId = $notificationId;
     }
 
@@ -28,13 +31,22 @@ class ProjectNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'message' => $this->userName . ' a créé un projet : ' . $this->project->name,
-            'user_name' => $this->userName,
+            'message' => "Un projet a été {$this->status} : ",
             'project_id' => $this->project->id,
             'status' => $this->status,
-            'data' => json_encode([
-                'url' => url('/projects/' . $this->project->id)
-            ]),
+            'url' => url("/projects/{$this->project->id}"),
+            'user_id' => $this->userId, // Inclure user_id ici
+        ];
+    }
+
+    public function toArray($notifiable)
+    {
+        return [
+            'message' => "Un projet a été {$this->status} : ",
+            'project_id' => $this->project->id,
+            'status' => $this->status,
+            'url' => url("/projects/{$this->project->id}") ?? 'default_url',  
+            'user_id' => $this->userId, // Inclure user_id ici aussi
         ];
     }
 }

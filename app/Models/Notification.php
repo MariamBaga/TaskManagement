@@ -11,17 +11,12 @@ class Notification extends Model
 
     protected $fillable = [
         'user_id',
+        'project_id',
         'type',
         'message',
-        'url',
-        'read_at',
+        'is_read',
     ];
 
-    protected $casts = [
-        'read_at' => 'datetime',
-    ];
-
-    // Relation avec l'utilisateur
     public function user()
     {
         return $this->belongsTo(User::class);

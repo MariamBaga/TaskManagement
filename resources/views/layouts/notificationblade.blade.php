@@ -13,32 +13,31 @@
             </div>
             <div class="tab-content card-body">
                 <div class="tab-pane fade show active">
-                <ul class="list-unstyled list mb-0">
-    @foreach(auth()->user()->unreadNotifications as $notification)
-        <li class="py-2 mb-1 border-bottom">
-            <a href="{{ $notification->data['url'] ?? '#' }}" class="d-flex">
-                <img class="avatar rounded-circle" src="{{ asset('assets/images/xs/avatar1.jpg') }}" alt="profile image">
-                <div class="flex-fill ms-2">
-                    <p class="d-flex justify-content-between mb-0">
-                        <span class="font-weight-bold">{{ $notification->data['user_name'] ?? 'Utilisateur' }}</span>
-                        <small>{{ $notification->created_at->diffForHumans() }}</small>
-                    </p>
-                    <span>{{ $notification->data['message'] ?? 'Vous avez une nouvelle notification.' }}</span>
-                </div>
-            </a>
-        </li>
-    @endforeach
+                    <ul class="list-unstyled list mb-0">
+                        @foreach(auth()->user()->unreadNotifications as $notification)
+                            <li class="py-2 mb-1 border-bottom">
+                                <a href="{{ $notification->data['url'] }}" class="d-flex">
+                                    <img class="avatar rounded-circle" src="{{ asset('assets/images/xs/avatar1.jpg') }}" alt="">
+                                    <div class="flex-fill ms-2">
+                                        <p class="d-flex justify-content-between mb-0">
+                                            <span class="font-weight-bold">{{ $notification->data['user_name'] ?? 'Utilisateur' }}</span>
+                                            <small>{{ $notification->created_at->diffForHumans() }}</small>
+                                        </p>
+                                        <span>{{ $notification->data['message'] }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
 
-    @if(auth()->user()->unreadNotifications->isEmpty())
-        <li class="py-2 text-center text-muted">
-            Aucune nouvelle notification
-        </li>
-    @endif
-</ul>
-
+                        @if(auth()->user()->unreadNotifications->isEmpty())
+                            <li class="py-2 text-center text-muted">
+                                Aucune nouvelle notification
+                            </li>
+                        @endif
+                    </ul>
                 </div>
             </div>
-            <a class="card-footer text-center border-top-0" href="{{ route('notifications.index') }}">Voir toutes les notifications</a>
+            <a class="card-footer text-center border-top-0" href="#"> Voir toutes les notifications</a>
         </div>
     </div>
 </div>
