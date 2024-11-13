@@ -133,7 +133,8 @@
                                             <div class="col-6">
                                                 <div class="d-flex align-items-center">
                                                     <i class="icofont-sand-clock"></i>
-                                                    <span class="ms-2">4 Month</span>
+                                                    <span class="ms-2">{{ number_format($project->date_debut->diffInMonths($project->date_fin), 0, '', '') }}
+                                                        Mois</span>
                                                 </div>
                                             </div>
                                             <div class="col-6">
@@ -152,9 +153,10 @@
                                         </div>
                                         <div class="dividers-block"></div>
                                         <div class="d-flex align-items-center justify-content-between mb-2">
-                                            <h4 class="small fw-bold mb-0">Progress</h4>
+                                            <h4 class="small fw-bold mb-0">Progrès</h4>
                                             <span class="small light-danger-bg  p-1 rounded"><i
-                                                    class="icofont-ui-clock"></i> 35 Days Left</span>
+                                                    class="icofont-ui-clock"></i> {{ $project->date_debut->diffInDays($project->date_fin) }}
+                                                    Jours</span>
                                         </div>
                                         <div class="progress" style="height: 8px;">
                                             <div class="progress-bar bg-secondary" role="progressbar"
