@@ -11,16 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
 
-     public function __construct()
-    {
-       
-
-        // Seuls les admins peuvent créer, modifier et supprimer des tâches
-        $this->middleware('role:admin')->only(['create', 'store', 'edit', 'update', 'destroy']);
-
-        // Tous les utilisateurs authentifiés peuvent voir les tâches
-        $this->middleware('auth')->only(['index', 'show']);
-    }
+   
     // Afficher toutes les tâches
     public function index()
     {
