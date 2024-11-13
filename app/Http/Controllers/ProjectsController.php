@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\User;
+use App\Models\Notification; // Importation du modèle Notification
+use App\Notifications\ProjectNotification;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
@@ -17,14 +21,16 @@ class ProjectsController extends Controller
         $low_projects = Project::where('priority', 'faible')
             ->orWhere('priority', 'bas')
             ->get();
-        return view('pages.projects.index', compact('users', 'projects', 'hight_projects', 'important_projects', 'low_projects'));
+
+        // Récupérer les notifications de l'utilisateur connecté
+        $notifications = Auth::user()->notifications()->latest()->get();
+        return view('pages.projects.index', compact('users', 'projects', 'hight_projects', 'important_projects', 'low_projects', 'notifications'));
     }
 
     public function create() {}
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'nom' => 'required|string',
             'description' => 'nullable|string',
@@ -36,26 +42,31 @@ class ProjectsController extends Controller
             'priority' => 'required|string',
             'category' => 'required|string',
         ]);
+
         $project = Project::create($request->all());
 
+        // Attacher les utilisateurs assignés au projet
         foreach ($request->users as $user_id) {
             $user = User::find($user_id);
             $user->projects()->attach($project->id);
         }
 
-
+        // Envoyer la notification aux utilisateurs assignés
+        foreach ($project->users as $user) {
+            if ($user->id !== Auth::id()) {
+                // Envoyer la notification de création
+                $notificationId = Str::uuid();
+                $user->notify(new ProjectNotification($project, 'created', $user->name, $notificationId));
+            }
+        }
 
         return back()->with('success', 'Projet Créé avec succès');
-        // if ($project)
-        // else
-        //     return back()->with('error', 'Erreur de saisie');
     }
 
     public function edit() {}
 
     public function update(Request $request, Project $project)
     {
-        // dd($request->all());
         $request->validate([
             'nom' => 'required|string',
             'description' => 'nullable|string',
@@ -70,17 +81,37 @@ class ProjectsController extends Controller
 
         $project->update($request->all());
 
-        foreach ($request->users as $user_id) {
-            $user = User::find($user_id);
-            $user->projects()->sync([$project->id]);
+        // Mettre à jour les utilisateurs assignés au projet
+        $project->users()->sync($request->users);
+
+         // Envoyer une notification de mise à jour aux utilisateurs assignés
+        foreach ($project->users as $user) {
+            if ($user->id !== Auth::id()) {
+                // Envoyer la notification de mise à jour
+                $notificationId = Str::uuid();
+                $user->notify(new ProjectNotification($project, 'updated', $user->name, $notificationId));
+            }
         }
 
-        return back()->with('success', 'Projet mise à jour avec succès');
+        return back()->with('success', 'Projet mis à jour avec succès');
     }
 
     public function destroy(Project $project)
     {
+        // Récupérer les utilisateurs assignés avant la suppression
+        $assignedUsers = $project->users;
+
+        // Supprimer le projet
         $project->delete();
-        return back()->with('Projet supprimé avec succès');
+
+         // Envoyer des notifications de suppression aux utilisateurs affectés
+         foreach ($assignedUsers as $user) {
+            if ($user->id !== Auth::id()) {
+                $notificationId = Str::uuid();
+                $user->notify(new ProjectNotification($project, 'deleted', $user->name, $notificationId));
+            }
+        }
+
+        return back()->with('success', 'Projet supprimé avec succès');
     }
 }

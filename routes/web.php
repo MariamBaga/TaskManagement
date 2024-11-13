@@ -5,6 +5,10 @@ use App\Http\Controllers\ProjectsController;
 use App\Http\Controllers\TaskController;
 
 use App\Http\Controllers\EmployeController;
+
+use App\Http\Controllers\NotificationController;
+
+
 use App\Http\Controllers\EmployeProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -27,6 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('employee', EmployeController::class);
 
     Route::resource('employeeProfile', EmployeProfileController::class);
+
+ Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+Route::get('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
 
 
 

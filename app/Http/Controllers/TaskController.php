@@ -17,6 +17,8 @@ class TaskController extends Controller
         $tasksCompleted = Task::with('project', 'user')->where('statut', 'complet')->get();
         $tasks = Task::latest()->get();
 
+         // Récupérer les notifications de l'utilisateur connecté
+         $notifications = Auth::user()->notifications()->latest()->get();
         // Charger les projets et utilisateurs pour le modal de création
         $projects = Project::all();
         $users = User::all();
