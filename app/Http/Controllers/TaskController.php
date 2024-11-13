@@ -151,14 +151,25 @@ class TaskController extends Controller
             'statut' => 'required|in:encours,review,complet',
         ]);
 
-
         // Mettre à jour le statut de la tâche
         $task->statut = $validated['statut'];
         $task->save();
 
+        // Créer un message spécifique selon le statut
+        $statusMessages = [
+            'encours' => 'La tâche est maintenant en cours.',
+            'review' => 'La tâche est en attente de révision.',
+            'complet' => 'La tâche a été terminée.',
+        ];
+
+        // Notifier l'utilisateur assigné à la tâche
+        $task->user->notify(new \App\Notifications\TaskStatusUpdated($task, $statusMessages[$task->statut]));
+
         // Retourner un message de succès et rediriger
         return redirect()->back()->with('success', 'Le statut de la tâche a été mis à jour avec succès.');
     }
+
+
 
 
 }
