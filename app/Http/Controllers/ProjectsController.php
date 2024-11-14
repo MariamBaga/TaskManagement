@@ -13,17 +13,30 @@ class ProjectsController extends Controller
 {
     public function index()
     {
+        // Récupérer l'utilisateur connecté
+        $user = Auth::user();
 
+        // Vérifier si l'utilisateur est un administrateur
+        if ($user->role == 'admin') {
+            // Si c'est un administrateur, récupérer tous les projets
+            $projects = Project::all();
+        } else {
+            // Sinon, récupérer uniquement les projets assignés à l'utilisateur
+            $projects = $user->projects;  // Utiliser la relation 'projects' définie dans le modèle User
+        }
 
+        // Séparer les projets par priorité
+        $hight_projects = $projects->where('priority', 'élevé');
+        $important_projects = $projects->where('priority', 'Moyenne');
+        $low_projects = $projects->whereIn('priority', ['faible', 'bas']);
+
+        // Récupérer les utilisateurs pour la vue
         $users = User::latest()->get();
-        $projects = Project::all();
-        $hight_projects = Project::where('priority', 'élevé')->get();
-        $important_projects = Project::where('priority', 'Moyenne')->get();
-        $low_projects = Project::whereIn('priority', ['faible', 'bas'])->get();
 
         // Récupérer les notifications de l'utilisateur connecté
-        $notifications = Auth::user()->notifications()->latest()->get();
+        $notifications = $user->notifications()->latest()->get();
 
+        // Retourner la vue avec les données
         return view('pages.projects.index', compact('users', 'projects', 'hight_projects', 'important_projects', 'low_projects', 'notifications'));
     }
 
