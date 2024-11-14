@@ -70,10 +70,7 @@
                     <i class="icofont-tasks color-careys-pink fs-4"></i>
                     <span class="">{{ $user->tasks->where('statut', 'complet')->count()}}</span>
                 </div>
-                <div class="star me-2">
-                    <i class="icofont-star text-warning fs-4"></i>
-                    <span class="">4.5</span>
-                </div>
+
                 <div class="own-video">
                     <i class="icofont-data color-light-orange fs-4"></i>
                     <span class="">{{ $user->tasks->count() }}</span>
@@ -110,10 +107,7 @@
                                     <i class="icofont-tasks color-careys-pink fs-4"></i>
                                     <span class="">00</span>
                                 </div>
-                                <div class="star me-2">
-                                    <i class="icofont-star text-warning fs-4"></i>
-                                    <span class="">00</span>
-                                </div>
+                              
                                 <div class="own-video">
                                     <i class="icofont-data color-light-orange fs-4"></i>
                                     <span class="">00</span>
