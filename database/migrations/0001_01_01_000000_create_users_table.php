@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('profile')->nullable();
             $table->string('started_at')->nullable();
             $table->string('image')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'utilisateur standard'])->default('utilisateur standard'); // Rôle avec valeur par défaut

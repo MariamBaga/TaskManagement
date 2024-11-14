@@ -106,6 +106,10 @@
                                                                 data-bs-target="#editproject{{ $task->id }}">
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -191,6 +195,10 @@
                                                                 data-bs-target="#editproject{{ $task->id }}">
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -275,6 +283,10 @@
                                                                 data-bs-target="#editproject{{ $task->id }}">
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -359,6 +371,10 @@
                                                                 data-bs-target="#editproject{{ $task->id }}">
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
+                                                            <button type="button" class="btn btn-outline-secondary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>

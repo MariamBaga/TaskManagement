@@ -87,12 +87,6 @@
                                         <span class="ms-2 small">{{ $user->started_at }}</span>
                                     </div>
                                 </div>
-                                <div class="col-xl-5">
-                                    <div class="d-flex align-items-center">
-                                        <i class="icofont-address-book"></i>
-                                        <span class="ms-2 small">{{ $user->address }}</span>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

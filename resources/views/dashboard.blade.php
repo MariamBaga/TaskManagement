@@ -45,7 +45,7 @@
 
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Totales</div>
-                                        <h5 class="mb-0 ">{{ $tasks->count() }}</h5>
+                                        <h5 class="mb-0 ">{{ auth()->user()->role == "admin" ? $tasks->count() : auth()->user()->tasks()->count()}}</h5>
                                     </div>
                                     <a href="{{ route('tasks.index') }}" title="voir-les-membres" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
@@ -62,7 +62,7 @@
 
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Terminées</div>
-                                        <h5 class="mb-0 ">{{ $tasks->where('statut', 'complet')->count()}}</h5>
+                                        <h5 class="mb-0 ">{{ auth()->user()->role == "admin" ? $tasks->where('statut', 'complet')->count() : auth()->user()->tasks()->where('statut', 'complet')->count()}}</h5>
                                     </div>
                                     <a href="{{ route('tasks.index') }}" title="espace-utilisé" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
@@ -79,7 +79,7 @@
 
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches en Cours</div>
-                                        <h5 class="mb-0 ">{{ $tasks->where('statut', 'encours')->count()}}</h5>
+                                        <h5 class="mb-0 ">{{ auth()->user()->role == "admin" ? $tasks->where('statut', 'encours')->count() : auth()->user()->tasks()->where('statut', 'encours')->count()}}</h5>
                                     </div>
                                     <a href="{{ route('tasks.index') }}" title="date-de-renouvellement" class="btn btn-link text-decoration-none  rounded-1"><i class="icofont-hand-drawn-right fs-2 "></i></a>
                                 </div>
@@ -95,7 +95,7 @@
                 <i class="icofont-data fs-3"></i>
                 <div class="d-flex flex-column ms-3">
                     <h6 class="mb-0">Projets Totaux</h6>
-                    <span>{{ $projects->count() }}</span>
+                    <span>{{ auth()->user()->role == "admin" ? $projects->count() : auth()->user()->projects()->count() }}</span>
                 </div>
             </div>
         </div>
@@ -106,7 +106,7 @@
                 <i class="icofont-chart-flow fs-3"></i>
                 <div class="d-flex flex-column ms-3">
                     <h6 class="mb-0">Projets à venir</h6>
-                    <span>{{ $projects->where('statut', 'debut')->count() }}</span>
+                    <span>{{ auth()->user()->role == "admin" ? $projects->where('statut', 'debut')->count() : auth()->user()->projects()->where('statut', 'debut')->count() }}</span>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                 <i class="icofont-chart-flow-2 fs-3"></i>
                 <div class="d-flex flex-column ms-3">
                     <h6 class="mb-0">Projets en Cours</h6>
-                    <span>{{ $projects->where('statut', 'encours')->count() }}</span>
+                    <span>{{ auth()->user()->role == "admin" ? $projects->where('statut', 'encours')->count() : auth()->user()->projects()->where('statut', 'encours')->count() }}</span>
                 </div>
             </div>
         </div>
