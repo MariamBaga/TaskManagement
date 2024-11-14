@@ -55,8 +55,7 @@
                     class="card-header p-0 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
                     <h3 class="fw-bold py-3 mb-0">Projets</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
-                        @admin<button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
-                            data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
+                        @admin<button type="button" class="btn w-sm-100" data-bs-toggle="modal" data-bs-target="#createproject" style="background-color: #FC7C04; color: black;"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
                             Un Projet</button> @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
@@ -86,9 +85,10 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center justify-content-between mt-5">
                                                     <div class="lesson_name">
-                                                        <div class="project-block light-orange-bg">
-                                                            <i class="{{ $project->icon }}"></i>
-                                                        </div>
+                                                    <div class="project-block" style="background-color: #EEE4FE;">
+    <i class="{{ $project->icon }}"></i>
+</div>
+
                                                         <span class="small text-muted project_name fw-bold">
                                                             {{ $project->category }}
                                                         </span>
@@ -148,10 +148,11 @@
                                                 <div class="dividers-block"></div>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                    <span class="small light-danger-bg  p-1 rounded"><i
-                                                            class="icofont-ui-clock"></i>
-                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                        Jours</span>
+                                                    <span class="small p-1 rounded" style="background-color: #FC7C04; color: black;">
+    <i class="icofont-ui-clock"></i>
+    {{ $project->date_debut->diffInDays($project->date_fin) }} Jours
+</span>
+
                                                 </div>
                                                 <div class="progress" style="height: 8px;">
                                                     <div class="progress-bar bg-secondary" role="progressbar"
@@ -241,10 +242,11 @@
                                                 <div class="dividers-block"></div>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                    <span class="small light-danger-bg  p-1 rounded"><i
-                                                            class="icofont-ui-clock"></i>
-                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                        Jours</span>
+                                                    <span class="small p-1 rounded" style="background-color: #FC7C04; color: white;">
+    <i class="icofont-ui-clock"></i>
+    {{ $project->date_debut->diffInDays($project->date_fin) }} Jours
+</span>
+
                                                 </div>
                                                 <div class="progress" style="height: 8px;">
                                                     <div class="progress-bar bg-secondary" role="progressbar"
@@ -334,10 +336,11 @@
                                                 <div class="dividers-block"></div>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                    <span class="small light-danger-bg  p-1 rounded"><i
-                                                            class="icofont-ui-clock"></i>
-                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                        Jours</span>
+                                                    <span class="small p-1 rounded" style="background-color: #FC7C04; color: white;">
+    <i class="icofont-ui-clock"></i>
+    {{ $project->date_debut->diffInDays($project->date_fin) }} Jours
+</span>
+
                                                 </div>
                                                 <div class="progress" style="height: 8px;">
                                                     <div class="progress-bar bg-secondary" role="progressbar"
@@ -427,10 +430,11 @@
                                                 <div class="dividers-block"></div>
                                                 <div class="d-flex align-items-center justify-content-between mb-2">
                                                     <h4 class="small fw-bold mb-0">Progrès</h4>
-                                                    <span class="small light-danger-bg  p-1 rounded"><i
-                                                            class="icofont-ui-clock"></i>
-                                                        {{ $project->date_debut->diffInDays($project->date_fin) }}
-                                                        Jours</span>
+                                                    <span class="small p-1 rounded" style="background-color: #FC7C04; color: black;">
+    <i class="icofont-ui-clock"></i>
+    {{ $project->date_debut->diffInDays($project->date_fin) }} Jours
+</span>
+
                                                 </div>
                                                 <div class="progress" style="height: 8px;">
                                                     <div class="progress-bar bg-secondary" role="progressbar"

@@ -39,7 +39,10 @@
                         <div class="card ">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar lg  rounded-1 no-thumbnail bg-lightyellow color-defult"><i class="bi bi-journal-check fs-4"></i></div>
+                                <div class="avatar lg rounded-1 no-thumbnail" style="background-color: #EEE4FE; color: #333;">
+    <i class="bi bi-journal-check fs-4"></i>
+</div>
+
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Totales</div>
                                         <h5 class="mb-0 ">{{ $tasks->count() }}</h5>
@@ -53,7 +56,10 @@
                         <div class="card ">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar lg  rounded-1 no-thumbnail bg-lightblue color-defult"><i class="bi bi-list-check fs-4"></i></div>
+                                <div class="avatar lg rounded-1 no-thumbnail" style="background-color: #EEE4FE; color: #333;">
+    <i class="bi bi-list-check fs-4"></i>
+</div>
+
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches Terminées</div>
                                         <h5 class="mb-0 ">{{ $tasks->where('statut', 'complet')->count()}}</h5>
@@ -67,7 +73,10 @@
                         <div class="card ">
                             <div class="card-body">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar lg  rounded-1 no-thumbnail bg-lightgreen color-defult"><i class="bi bi-clipboard-data fs-4"></i></div>
+                                <div class="avatar lg rounded-1 no-thumbnail" style="background-color: #EEE4FE; color: #333;">
+    <i class="bi bi-clipboard-data fs-4"></i>
+</div>
+
                                     <div class="flex-fill ms-4">
                                         <div class="">Tâches en Cours</div>
                                         <h5 class="mb-0 ">{{ $tasks->where('statut', 'encours')->count()}}</h5>
@@ -80,51 +89,52 @@
                 </div><!-- Fin de la ligne -->
 
                 <div class="row g-3 mb-3 row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 row-cols-xl-4 row-cols-xxl-4">
-                    <div class="col">
-                        <div class="card bg-primary">
-                            <div class="card-body text-white d-flex align-items-center">
-                                <i class="icofont-data fs-3"></i>
-                                <div class="d-flex flex-column ms-3">
-                                    <h6 class="mb-0">Projets Totaux</h6>
-                                    <span class="text-white">{{ $projects->count() }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-primary">
-                            <div class="card-body text-white d-flex align-items-center">
-                                <i class="icofont-chart-flow fs-3"></i>
-                                <div class="d-flex flex-column ms-3">
-                                    <h6 class="mb-0">Projets à venir</h6>
-                                    <span class="text-white">{{ $projects->where('statut', 'debut')->count()}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-primary">
-                            <div class="card-body text-white d-flex align-items-center">
-                                <i class="icofont-chart-flow-2 fs-3"></i>
-                                <div class="d-flex flex-column ms-3">
-                                    <h6 class="mb-0">Projets en Cours</h6>
-                                    <span class="text-white">{{ $projects->where('statut', 'encours')->count() }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-primary">
-                            <div class="card-body text-white d-flex align-items-center">
-                                <i class="icofont-tasks fs-3"></i>
-                                <div class="d-flex flex-column ms-3">
-                                    <h6 class="mb-0">Projets Terminés</h6>
-                                    <span class="text-white">{{ $projects->where('statut', 'complet')->count() }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col">
+        <div class="card" style="background-color: white; border: 2px solid #EEE4FE;">
+            <div class="card-body text-dark d-flex align-items-center">
+                <i class="icofont-data fs-3"></i>
+                <div class="d-flex flex-column ms-3">
+                    <h6 class="mb-0">Projets Totaux</h6>
+                    <span>{{ $projects->count() }}</span>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="background-color: white; border: 2px solid #EEE4FE;">
+            <div class="card-body text-dark d-flex align-items-center">
+                <i class="icofont-chart-flow fs-3"></i>
+                <div class="d-flex flex-column ms-3">
+                    <h6 class="mb-0">Projets à venir</h6>
+                    <span>{{ $projects->where('statut', 'debut')->count() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="background-color: white; border: 2px solid #EEE4FE;">
+            <div class="card-body text-dark d-flex align-items-center">
+                <i class="icofont-chart-flow-2 fs-3"></i>
+                <div class="d-flex flex-column ms-3">
+                    <h6 class="mb-0">Projets en Cours</h6>
+                    <span>{{ $projects->where('statut', 'encours')->count() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" style="background-color: white; border: 2px solid #EEE4FE;">
+            <div class="card-body text-dark d-flex align-items-center">
+                <i class="icofont-tasks fs-3"></i>
+                <div class="d-flex flex-column ms-3">
+                    <h6 class="mb-0">Projets Terminés</h6>
+                    <span>{{ $projects->where('statut', 'complet')->count() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                 <div class="row g-3 mb-3 row-deck">
                     <div class="col-md-12">
                         <div class="card mb-3">

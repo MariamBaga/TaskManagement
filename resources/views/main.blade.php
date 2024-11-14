@@ -26,7 +26,7 @@
             @yield('modal-member')
         </div>
 
-        @include('layouts.settings')
+    
     </div>
 
     @yield('scripts')
