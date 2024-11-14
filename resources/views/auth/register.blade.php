@@ -26,7 +26,7 @@
                                 </svg>
                             </div>
                             <div class="mb-5">
-                                <h2 class="color-900 text-center">My-Task - Gérons Mieux</h2>
+                                <h2 class="color-900 text-center">Taskerate - Gérons Mieux</h2>
                             </div>
                             <img src="../assets/images/login-img.svg" alt="image-login">
                         </div>

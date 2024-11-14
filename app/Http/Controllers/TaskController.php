@@ -109,7 +109,7 @@ Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez 
 
 
 
-        return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
+        return redirect()->route('tasks.index')->with('success', 'Tâche créé avec succès');
     }
 
     // Afficher une tâche spécifique
@@ -166,7 +166,7 @@ Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez 
             $project->save();
         }
 
-        return redirect()->route('tasks.index')->with('success', 'Task updated successfully.');
+        return redirect()->route('tasks.index')->with('success', 'Tâche mise à avec succès.');
     }
 
     // Supprimer une tâche
@@ -180,7 +180,7 @@ Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez 
 
 
         $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
+        return redirect()->route('tasks.index')->with('success', 'Tâche supprimé avec succès.');
     }
 
     public function updateStatus(Task $task)
