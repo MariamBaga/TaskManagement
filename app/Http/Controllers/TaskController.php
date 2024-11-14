@@ -18,24 +18,42 @@ class TaskController extends Controller
         // Récupérer l'utilisateur connecté
         $user = Auth::user();
 
-        // Récupérer uniquement les tâches affectées à l'utilisateur connecté
-        $tasksInProgress = Task::with('project', 'user')
-            ->where('user_id', $user->id)
-            ->where('statut', 'encours')
-            ->get();
+        // Vérifier si l'utilisateur est un administrateur
+        if ($user->role == 'admin') {  // Supposons que le champ 'role' détermine le rôle de l'utilisateur
+            // Si c'est un administrateur, récupérer toutes les tâches
+            $tasksInProgress = Task::with('project', 'user')
+                ->where('statut', 'encours')
+                ->get();
 
-        $tasksNeedsReview = Task::with('project', 'user')
-            ->where('user_id', $user->id)
-            ->where('statut', 'review')
-            ->get();
+            $tasksNeedsReview = Task::with('project', 'user')
+                ->where('statut', 'review')
+                ->get();
 
-        $tasksCompleted = Task::with('project', 'user')
-            ->where('user_id', $user->id)
-            ->where('statut', 'complet')
-            ->get();
+            $tasksCompleted = Task::with('project', 'user')
+                ->where('statut', 'complet')
+                ->get();
 
-        // Charger toutes les tâches qui concernent l'utilisateur connecté
-        $tasks = Task::where('user_id', $user->id)->latest()->get();
+            $tasks = Task::all();  // Récupérer toutes les tâches pour l'administrateur
+        } else {
+            // Sinon, récupérer uniquement les tâches assignées à l'utilisateur connecté
+            $tasksInProgress = Task::with('project', 'user')
+                ->where('user_id', $user->id)
+                ->where('statut', 'encours')
+                ->get();
+
+            $tasksNeedsReview = Task::with('project', 'user')
+                ->where('user_id', $user->id)
+                ->where('statut', 'review')
+                ->get();
+
+            $tasksCompleted = Task::with('project', 'user')
+                ->where('user_id', $user->id)
+                ->where('statut', 'complet')
+                ->get();
+
+            // Charger toutes les tâches qui concernent l'utilisateur connecté
+            $tasks = Task::where('user_id', $user->id)->latest()->get();
+        }
 
         // Récupérer les notifications de l'utilisateur connecté
         $notifications = $user->notifications()->latest()->get();
@@ -44,8 +62,10 @@ class TaskController extends Controller
         $projects = Project::all();
         $users = User::all();
 
+        // Retourner la vue avec les données appropriées
         return view('Admin.Task.index', compact('tasksInProgress', 'tasksNeedsReview', 'tasksCompleted', 'projects', 'users', 'tasks'));
     }
+
 
 
     // Afficher le formulaire de création de tâche
@@ -77,9 +97,16 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
             'user_id' => $request->user_id,
         ]);
+// Notification à l'utilisateur assigné à la tâche
+$task->user->notify(new \App\Notifications\TaskStatusUpdated($task, 'Une nouvelle tâche vous a été assignée.'));
+
+// Notification à l'utilisateur actuel (celui qui effectue l'action)
+Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez créé une nouvelle tâche.'));
+
 
         $task->project->statut = "encours";
         $task->project->save();
+
 
 
         return redirect()->route('tasks.index')->with('success', 'Task created successfully.');
@@ -119,6 +146,11 @@ class TaskController extends Controller
             'project_id' => $request->project_id,
             'user_id' => $request->user_id,
         ]);
+ // Notification à l'utilisateur assigné à la tâche
+ $task->user->notify(new \App\Notifications\TaskStatusUpdated($task, 'Le statut de votre tâche a été mis à jour.'));
+
+ // Notification à l'utilisateur actuel (celui qui effectue l'action)
+ Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez mis à jour une tâche.'));
 
         $project =  $task->project;
         $uncompletedTasks = $project->tasks->filter(function ($task) {
@@ -140,6 +172,13 @@ class TaskController extends Controller
     // Supprimer une tâche
     public function destroy(Task $task)
     {
+        // Notification à l'utilisateur assigné à la tâche
+    $task->user->notify(new \App\Notifications\TaskStatusUpdated($task, 'Votre tâche a été supprimée.'));
+
+    // Notification à l'utilisateur actuel (celui qui effectue l'action)
+    Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez supprimé une tâche.'));
+
+
         $task->delete();
         return redirect()->route('tasks.index')->with('success', 'Task deleted successfully.');
     }
