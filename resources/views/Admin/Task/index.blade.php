@@ -57,9 +57,11 @@
                     <h3 class="fw-bold py-3 mb-0">Tâches</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
                         @admin
-                            <button type="button" class="btn btn-dark w-sm-100" data-bs-toggle="modal"
-                                data-bs-target="#createproject"><i class="icofont-plus-circle me-2 fs-6"></i>Ajouter
-                                Une Tâche</button>
+                        <button type="button" class="btn w-sm-100" data-bs-toggle="modal"
+        data-bs-target="#createproject" style="background-color: #FC7C04; color: black;">
+    <i class="icofont-plus-circle me-2 fs-6"></i>Ajouter Une Tâche
+</button>
+
                         @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
@@ -164,7 +166,7 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <div class="tab-pane fade" id="Started-list">
                         <div class="row g-3 gy-5 py-3 row-deck">
                             @if ($tasksNeedsReview->count() > 0)

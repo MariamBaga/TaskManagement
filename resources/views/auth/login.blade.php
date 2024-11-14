@@ -37,15 +37,7 @@
                                         <h1>Connexion</h1>
                                         <span>Accès gratuit à notre tableau de bord.</span>
                                     </div>
-                                    <div class="col-12 text-center mb-4">
-                                        <a class="btn btn-lg btn-outline-secondary btn-block" href="#">
-                                            <span class="d-flex justify-content-center align-items-center">
-                                                <img class="avatar xs me-2" src="../assets/images/google.svg" alt="Image Description">
-                                                Connexion avec Google
-                                            </span>
-                                        </a>
-                                        <span class="dividers text-muted mt-4">OU</span>
-                                    </div>
+                                   
                                     <div class="col-12">
                                         <div class="mb-2">
                                             <label class="form-label" for="email">Adresse e-mail</label>

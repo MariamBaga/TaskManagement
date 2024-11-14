@@ -153,8 +153,10 @@
                                         <div class="dividers-block"></div>
                                         <div class="d-flex align-items-center justify-content-between mb-2">
                                             <h4 class="small fw-bold mb-0">Progress</h4>
-                                            <span class="small light-danger-bg  p-1 rounded"><i
-                                                    class="icofont-ui-clock"></i> 35 Days Left</span>
+                                          <span class="small p-1 rounded" style="background-color: #FC7C04; color: black;">
+    <i class="icofont-ui-clock"></i> 35 Days Left
+</span>
+
                                         </div>
                                         <div class="progress" style="height: 8px;">
                                             <div class="progress-bar bg-secondary" role="progressbar"
