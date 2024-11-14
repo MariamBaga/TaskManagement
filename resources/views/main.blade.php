@@ -26,13 +26,12 @@
             @yield('modal-member')
         </div>
 
-    
+
     </div>
 
     @yield('scripts')
 
 </body>
 
-<!-- Mirrored from pixelwibes.com/template/my-task/html/dist/project-dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Nov 2024 12:50:55 GMT -->
-
+<
 </html>

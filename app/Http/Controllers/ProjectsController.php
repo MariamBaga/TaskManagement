@@ -65,7 +65,7 @@ class ProjectsController extends Controller
     foreach ($project->users as $user) {
         $notificationId = Str::uuid();
         // Envoyer la notification à tous les utilisateurs, y compris l'utilisateur actuel
-        $user->notify(new ProjectNotification($project, 'created', Auth::user(), $notificationId));
+        $user->notify(new ProjectNotification($project, 'crée', Auth::user(), $notificationId));
     }
 
         return back()->with('success', 'Projet créé avec succès');
@@ -95,7 +95,7 @@ class ProjectsController extends Controller
         // Envoyer une notification de mise à jour à tous les utilisateurs, y compris l'utilisateur actuel
     foreach ($project->users as $user) {
         $notificationId = Str::uuid();
-        $user->notify(new ProjectNotification($project, 'updated',  Auth::user(), $notificationId));
+        $user->notify(new ProjectNotification($project, 'mise à jour',  Auth::user(), $notificationId));
     }
 
         return back()->with('success', 'Projet mis à jour avec succès');
@@ -113,7 +113,7 @@ class ProjectsController extends Controller
     // Envoyer des notifications de suppression à tous les utilisateurs affectés, y compris l'utilisateur actuel
     foreach ($assignedUsers as $user) {
         $notificationId = Str::uuid();
-        $user->notify(new ProjectNotification($project, 'deleted',  Auth::user(), $notificationId));
+        $user->notify(new ProjectNotification($project, 'supprimé',  Auth::user(), $notificationId));
     }
 
         return back()->with('success', 'Projet supprimé avec succès');

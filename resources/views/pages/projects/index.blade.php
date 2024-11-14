@@ -1672,7 +1672,7 @@
 <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
 
 <!-- Jquery Page Js -->
-<script src="{{ asset('https://pixelwibes.com/template/my-task/html/js/template.js') }}"></script>
+<!-- <script src="{{ asset('https://pixelwibes.com/template/my-task/html/js/template.js') }}"></script> -->
 
 <script>
     $(document).ready(function() {

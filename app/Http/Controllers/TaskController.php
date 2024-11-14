@@ -166,7 +166,7 @@ Auth::user()->notify(new \App\Notifications\TaskStatusUpdated($task, 'Vous avez 
             $project->save();
         }
 
-        return redirect()->route('tasks.index')->with('success', 'Tâche mise à avec succès.');
+        return redirect()->route('tasks.index')->with('success', 'Tâche mise à jour avec succès.');
     }
 
     // Supprimer une tâche
