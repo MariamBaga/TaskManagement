@@ -107,7 +107,7 @@
                                     <i class="icofont-tasks color-careys-pink fs-4"></i>
                                     <span class="">00</span>
                                 </div>
-                              
+
                                 <div class="own-video">
                                     <i class="icofont-data color-light-orange fs-4"></i>
                                     <span class="">00</span>
@@ -155,7 +155,7 @@
 <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
 
 <!-- Jquery Page Js -->
-<script src="{{ asset('https://pixelwibes.com/template/my-task/html/js/template.js') }}"></script>
+<!--<script src="{{ asset('https://pixelwibes.com/template/my-task/html/js/template.js') }}"></script>-->
 
 <!-- select2 JS Scripts -->
 <script src="{{ asset('site/assets/js/select2.full.min.js') }}"></script>
