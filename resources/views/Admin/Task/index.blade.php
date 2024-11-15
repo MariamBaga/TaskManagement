@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="{{ asset('site/assets/css/select2.min.css') }}">
+        <link rel="icon" href="{{ asset('assets/images/logoTaskerate.jpeg')}}" >
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -29,8 +30,8 @@
             }
 
             /* .modal-backdrop {
-                                                                                                                                                                                            z-index: -1;
-                                                                                                                                                                                        } */
+                                                                                                                                                                                                z-index: -1;
+                                                                                                                                                                                            } */
         </style>
     @section('title', 'Nouveau Projet')
     <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
@@ -43,7 +44,7 @@
 
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session('success') }}
+        {{ session('success') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
@@ -57,11 +58,10 @@
                     <h3 class="fw-bold py-3 mb-0">Tâches</h3>
                     <div class="d-flex py-2 project-tab flex-wrap w-sm-100">
                         @admin
-                        <button type="button" class="btn w-sm-100" data-bs-toggle="modal"
-        data-bs-target="#createproject" style="background-color: #FC7C04; color: black;">
-    <i class="icofont-plus-circle me-2 fs-6"></i>Ajouter Une Tâche
-</button>
-
+                            <button type="button" class="btn w-sm-100" data-bs-toggle="modal"
+                                data-bs-target="#createproject" style="background-color: #FC7C04; color: black;">
+                                <i class="icofont-plus-circle me-2 fs-6"></i>Ajouter Une Tâche
+                            </button>
                         @endadmin
                         <ul class="nav nav-tabs tab-body-header rounded ms-3 prtab-set w-sm-100" role="tablist">
                             <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#All-list"
@@ -107,9 +107,9 @@
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
                                                             <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                    class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -196,9 +196,9 @@
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
                                                             <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                    class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -284,9 +284,9 @@
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
                                                             <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                    class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -372,9 +372,9 @@
                                                                 <i class="icofont-edit text-success"></i>
                                                             </button>
                                                             <button type="button" class="btn btn-outline-secondary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#deleteproject{{ $task->id }}"><i
-                                                                class="icofont-ui-delete text-danger"></i></button>
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteproject{{ $task->id }}"><i
+                                                                    class="icofont-ui-delete text-danger"></i></button>
                                                         </div>
                                                     @endadmin
                                                 </div>
@@ -690,7 +690,8 @@
 <script src="{{ asset('assets/bundles/libscripts.bundle.js') }}"></script>
 
 <!-- Jquery Page Js -->
-<!-- <script src="{{ asset('https://pixelwibes.com/template/my-task/html/js/template.js') }}"></script> -->
+<script src="{{ asset('assets/js/chatbot.js') }}"></script>
+
 
 <script>
     $(document).ready(function() {
