@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\DatabaseMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Auth;
 
 class TaskStatusUpdated extends Notification
 {
@@ -35,13 +36,14 @@ class TaskStatusUpdated extends Notification
             'project_name' => $this->task->project->nom, // Inclure le nom du projet
             'status' => $this->task->statut,
             'url' => url("/tasks/{$this->task->id}"),
+           'user_name' => Auth::user()->name,  // Utilisateur assigné
         ];
     }
 
     public function toArray($notifiable)
     {
         return [
-            'user_name' => $this->task->assigned_to,  // Utilisateur assigné
+            'user_name' => Auth::user()->name,  // Utilisateur qui effectue l'action
             'message' => "Nouvelle tâche assignée : {$this->task->title}",
             'url' => route('tasks.show', $this->task->id),  // Lien vers la tâche
 
